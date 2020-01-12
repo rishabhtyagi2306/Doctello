@@ -1,4 +1,5 @@
 ﻿using DoctorCorps.Models;
+using ShoppingELF.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,11 +24,16 @@ namespace DoctorCorps.Controllers
         [Route("api/User/EnterOTP/{Userid}")]
         public HttpResponseMessage EnterOTP([FromBody]UserModel model, int Userid)
         {
-            bool x = new UserModel().EnterOTP(model, Userid);
-            if (x)
-                return Request.CreateResponse(HttpStatusCode.OK, "Otp Verified");
-            else
-                return Request.CreateResponse(HttpStatusCode.NotFound, "Please Enter correct OTP");
+            using(DoctorCorpsEntities context = new DoctorCorpsEntities())
+            {
+                UserTable user = new UserTable();
+                user = context.UserTable.FirstOrDefault(m => m.UserID == Userid);
+                bool x = new UserModel().EnterOTP(model, Userid);
+                if (x)
+                    return Request.CreateResponse(HttpStatusCode.OK, TokenManager.GenerateToken(user.UserEmail));
+                else
+                    return Request.CreateResponse(HttpStatusCode.NotFound, "Please Enter correct OTP");
+            }
         }
     }
 }
