@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DoctorCorpsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DoctorCorpsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AppointmentsTable">
           <Key>
             <PropertyRef Name="AppiontmentID" />
@@ -108,6 +108,7 @@
           <Property Name="IsAccountVerified" Type="bit" />
           <Property Name="IsAadharVerified" Type="bit" />
           <Property Name="OTP" Type="nvarchar(max)" />
+          <Property Name="OTPDateTime" Type="datetime" />
         </EntityType>
         <Association Name="FK_AppointmentsTable_DoctorTable">
           <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="0..1" />
@@ -360,8 +361,7 @@
             <End Role="ServiceTable" EntitySet="ServiceTable" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DoctorCorpsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -498,6 +498,7 @@
           <NavigationProperty Name="HospitalRatingTable" Relationship="Self.FK_HospitalRatingTable_UserTable" FromRole="UserTable" ToRole="HospitalRatingTable" />
           <NavigationProperty Name="PreviousAppointmentsTable" Relationship="Self.FK_PreviousAppointmentsTable_UserTable" FromRole="UserTable" ToRole="PreviousAppointmentsTable" />
           <NavigationProperty Name="ReportTable" Relationship="Self.FK_ReportTable_UserTable" FromRole="UserTable" ToRole="ReportTable" />
+          <Property Name="OTPDateTime" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_AppointmentsTable_DoctorTable">
           <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="0..1" />
@@ -853,6 +854,7 @@
           <EntitySetMapping Name="UserTable">
             <EntityTypeMapping TypeName="DoctorCorpsModel.UserTable">
               <MappingFragment StoreEntitySet="UserTable">
+                <ScalarProperty Name="OTPDateTime" ColumnName="OTPDateTime" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />

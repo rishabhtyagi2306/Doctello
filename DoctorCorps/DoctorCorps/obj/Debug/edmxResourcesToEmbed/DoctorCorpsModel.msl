@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DoctorCorpsModelStoreContainer" CdmEntityContainer="DoctorCorpsEntities">
+    <EntitySetMapping Name="AppointmentsTable">
+      <EntityTypeMapping TypeName="DoctorCorpsModel.AppointmentsTable">
+        <MappingFragment StoreEntitySet="AppointmentsTable">
+          <ScalarProperty Name="AppiontmentID" ColumnName="AppiontmentID" />
+          <ScalarProperty Name="AppliedFor" ColumnName="AppliedFor" />
+          <ScalarProperty Name="AppliedOn" ColumnName="AppliedOn" />
+          <ScalarProperty Name="FeeStatus" ColumnName="FeeStatus" />
+          <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+          <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DoctorTable">
+      <EntityTypeMapping TypeName="DoctorCorpsModel.DoctorTable">
+        <MappingFragment StoreEntitySet="DoctorTable">
+          <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+          <ScalarProperty Name="DoctorName" ColumnName="DoctorName" />
+          <ScalarProperty Name="DoctorRegNo" ColumnName="DoctorRegNo" />
+          <ScalarProperty Name="AboutDoctor" ColumnName="AboutDoctor" />
+          <ScalarProperty Name="DoctorFees" ColumnName="DoctorFees" />
+          <ScalarProperty Name="DoctorEmail" ColumnName="DoctorEmail" />
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HospitalRatingTable">
+      <EntityTypeMapping TypeName="DoctorCorpsModel.HospitalRatingTable">
+        <MappingFragment StoreEntitySet="HospitalRatingTable">
+          <ScalarProperty Name="RatingID" ColumnName="RatingID" />
+          <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HospitalTable">
+      <EntityTypeMapping TypeName="DoctorCorpsModel.HospitalTable">
+        <MappingFragment StoreEntitySet="HospitalTable">
+          <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+          <ScalarProperty Name="HospitalName" ColumnName="HospitalName" />
+          <ScalarProperty Name="HospitalAddress" ColumnName="HospitalAddress" />
+          <ScalarProperty Name="HospitalLocation" ColumnName="HospitalLocation" />
+          <ScalarProperty Name="HospitalEmail" ColumnName="HospitalEmail" />
+          <ScalarProperty Name="HospitalPhone" ColumnName="HospitalPhone" />
+          <ScalarProperty Name="AboutHospital" ColumnName="AboutHospital" />
+          <ScalarProperty Name="AverageRating" ColumnName="AverageRating" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PathologyTable">
+      <EntityTypeMapping TypeName="DoctorCorpsModel.PathologyTable">
+        <MappingFragment StoreEntitySet="PathologyTable">
+          <ScalarProperty Name="PathologyID" ColumnName="PathologyID" />
+          <ScalarProperty Name="PathologyName" ColumnName="PathologyName" />
+          <ScalarProperty Name="PathologyFees" ColumnName="PathologyFees" />
+          <ScalarProperty Name="PatholgyDescription" ColumnName="PatholgyDescription" />
+          <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PreviousAppointmentsTable">
+      <EntityTypeMapping TypeName="DoctorCorpsModel.PreviousAppointmentsTable">
+        <MappingFragment StoreEntitySet="PreviousAppointmentsTable">
+          <ScalarProperty Name="PAID" ColumnName="PAID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+          <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReportTable">
+      <EntityTypeMapping TypeName="DoctorCorpsModel.ReportTable">
+        <MappingFragment StoreEntitySet="ReportTable">
+          <ScalarProperty Name="ReportsID" ColumnName="ReportsID" />
+          <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+          <ScalarProperty Name="Files" ColumnName="Files" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceTable">
+      <EntityTypeMapping TypeName="DoctorCorpsModel.ServiceTable">
+        <MappingFragment StoreEntitySet="ServiceTable">
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+          <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+          <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTable">
+      <EntityTypeMapping TypeName="DoctorCorpsModel.UserTable">
+        <MappingFragment StoreEntitySet="UserTable">
+          <ScalarProperty Name="OTPDateTime" ColumnName="OTPDateTime" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+          <ScalarProperty Name="UserGender" ColumnName="UserGender" />
+          <ScalarProperty Name="UserDOB" ColumnName="UserDOB" />
+          <ScalarProperty Name="MedicalHistory" ColumnName="MedicalHistory" />
+          <ScalarProperty Name="UserLocation" ColumnName="UserLocation" />
+          <ScalarProperty Name="AadharNo" ColumnName="AadharNo" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IsAccountVerified" ColumnName="IsAccountVerified" />
+          <ScalarProperty Name="IsAadharVerified" ColumnName="IsAadharVerified" />
+          <ScalarProperty Name="OTP" ColumnName="OTP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

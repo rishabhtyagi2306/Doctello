@@ -36,6 +36,7 @@ namespace DoctorCorps
         public Nullable<bool> IsAccountVerified { get; set; }
         public Nullable<bool> IsAadharVerified { get; set; }
         public string OTP { get; set; }
+        public Nullable<System.DateTime> OTPDateTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AppointmentsTable> AppointmentsTable { get; set; }
