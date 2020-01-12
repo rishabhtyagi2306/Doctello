@@ -38,26 +38,47 @@ namespace DoctorCorps.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReportTable> ReportTable { get; set; }
 
+
+        public string GenerateOTP()
+        {
+            Random generator = new Random();
+            String OTP = generator.Next(100000, 1000000).ToString();
+            return OTP;
+        }
+
+
         public void AddUser(UserTable user)
         {
             UserTable us = new UserTable();
-            using(DoctorCorpsEntities db = new DoctorCorpsEntities())
+            using (DoctorCorpsEntities db = new DoctorCorpsEntities())
             {
+                user.OTPDateTime = DateTime.Now;
+                user.OTP = Convert.ToString(GenerateOTP());
                 user.Password = Crypto.Hash(user.Password);
                 db.UserTable.Add(user);
                 db.SaveChanges();
+                new SmsService().Messages(new SmsService().Mssg(user, user.OTP));
             }
         }
     }
 
     public class SmsService : IIdentityMessageService
     {
-        public Task SendMessage(IdentityMessage message, string otp)
+        public IdentityMessage Mssg(UserTable user, string otp)
+        {
+            IdentityMessage message = new IdentityMessage();
+
+            message.Body = "Your OTP is " + otp + ". Please never share your OTP with anyone, Doctello never asks for OTP on Phone calls";
+            message.Destination = user.UserPhone;
+            return message;
+
+        }
+
+        public void Messages(IdentityMessage message)
         {
             var accountSid = ConfigurationManager.AppSettings["SMSAccountIdentification"];
             var authToken = ConfigurationManager.AppSettings["SMSAccountPassword"];
             var fromNumber = ConfigurationManager.AppSettings["SMSAccountFrom"];
-
             TwilioClient.Init(accountSid, authToken);
 
             MessageResource result = MessageResource.Create(
@@ -66,10 +87,8 @@ namespace DoctorCorps.Models
             body: message.Body
             );
 
-            //Status is one of Queued, Sending, Sent, Failed or null if the number is not valid
             Trace.TraceInformation(result.Status.ToString());
-            //Twilio doesn't currently have an async API, so return success.
-            return Task.FromResult(0);
+            return;
         }
 
         Task IIdentityMessageService.SendAsync(IdentityMessage message)
