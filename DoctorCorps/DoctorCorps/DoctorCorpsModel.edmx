@@ -1,0 +1,895 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DoctorCorpsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppointmentsTable">
+          <Key>
+            <PropertyRef Name="AppiontmentID" />
+          </Key>
+          <Property Name="AppiontmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppliedFor" Type="date" Nullable="false" />
+          <Property Name="AppliedOn" Type="datetime" Nullable="false" />
+          <Property Name="FeeStatus" Type="nvarchar(max)" />
+          <Property Name="IsConfirmed" Type="bit" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="HospitalID" Type="int" />
+          <Property Name="DoctorID" Type="int" />
+        </EntityType>
+        <EntityType Name="DoctorTable">
+          <Key>
+            <PropertyRef Name="DoctorID" />
+          </Key>
+          <Property Name="DoctorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DoctorRegNo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AboutDoctor" Type="nvarchar(max)" />
+          <Property Name="DoctorFees" Type="int" />
+          <Property Name="DoctorEmail" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ServiceID" Type="int" />
+        </EntityType>
+        <EntityType Name="HospitalRatingTable">
+          <Key>
+            <PropertyRef Name="RatingID" />
+          </Key>
+          <Property Name="RatingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HospitalID" Type="int" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HospitalTable">
+          <Key>
+            <PropertyRef Name="HospitalID" />
+          </Key>
+          <Property Name="HospitalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HospitalName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="HospitalAddress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="HospitalLocation" Type="nvarchar(max)" />
+          <Property Name="HospitalEmail" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="HospitalPhone" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AboutHospital" Type="nvarchar(max)" />
+          <Property Name="AverageRating" Type="float" />
+        </EntityType>
+        <EntityType Name="PathologyTable">
+          <Key>
+            <PropertyRef Name="PathologyID" />
+          </Key>
+          <Property Name="PathologyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PathologyName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PathologyFees" Type="int" Nullable="false" />
+          <Property Name="PatholgyDescription" Type="nvarchar(max)" />
+          <Property Name="DoctorID" Type="int" />
+          <Property Name="ServiceID" Type="int" />
+        </EntityType>
+        <EntityType Name="PreviousAppointmentsTable">
+          <Key>
+            <PropertyRef Name="PAID" />
+          </Key>
+          <Property Name="PAID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="HospitalID" Type="int" />
+          <Property Name="DoctorID" Type="int" />
+        </EntityType>
+        <EntityType Name="ReportTable">
+          <Key>
+            <PropertyRef Name="ReportsID" />
+          </Key>
+          <Property Name="ReportsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HospitalID" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="DoctorID" Type="int" />
+          <Property Name="Files" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ServiceTable">
+          <Key>
+            <PropertyRef Name="ServiceID" />
+          </Key>
+          <Property Name="ServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="HospitalID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserTable">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserEmail" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserPhone" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserGender" Type="char" MaxLength="10" />
+          <Property Name="UserDOB" Type="date" />
+          <Property Name="MedicalHistory" Type="nvarchar(max)" />
+          <Property Name="UserLocation" Type="nvarchar(max)" />
+          <Property Name="AadharNo" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsAccountVerified" Type="bit" />
+          <Property Name="IsAadharVerified" Type="bit" />
+          <Property Name="OTP" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_AppointmentsTable_DoctorTable">
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="0..1" />
+          <End Role="AppointmentsTable" Type="Self.AppointmentsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorTable">
+              <PropertyRef Name="DoctorID" />
+            </Principal>
+            <Dependent Role="AppointmentsTable">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppointmentsTable_HospitalTable">
+          <End Role="HospitalTable" Type="Self.HospitalTable" Multiplicity="0..1" />
+          <End Role="AppointmentsTable" Type="Self.AppointmentsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalTable">
+              <PropertyRef Name="HospitalID" />
+            </Principal>
+            <Dependent Role="AppointmentsTable">
+              <PropertyRef Name="HospitalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppointmentsTable_UserTable">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
+          <End Role="AppointmentsTable" Type="Self.AppointmentsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="AppointmentsTable">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorTable_ServiceTable">
+          <End Role="ServiceTable" Type="Self.ServiceTable" Multiplicity="0..1" />
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceTable">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="DoctorTable">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HospitalRatingTable_HospitalTable">
+          <End Role="HospitalTable" Type="Self.HospitalTable" Multiplicity="1" />
+          <End Role="HospitalRatingTable" Type="Self.HospitalRatingTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalTable">
+              <PropertyRef Name="HospitalID" />
+            </Principal>
+            <Dependent Role="HospitalRatingTable">
+              <PropertyRef Name="HospitalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HospitalRatingTable_UserTable">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
+          <End Role="HospitalRatingTable" Type="Self.HospitalRatingTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="HospitalRatingTable">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PathologyTable_DoctorTable">
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="0..1" />
+          <End Role="PathologyTable" Type="Self.PathologyTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorTable">
+              <PropertyRef Name="DoctorID" />
+            </Principal>
+            <Dependent Role="PathologyTable">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PathologyTable_ServiceTable">
+          <End Role="ServiceTable" Type="Self.ServiceTable" Multiplicity="0..1" />
+          <End Role="PathologyTable" Type="Self.PathologyTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceTable">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="PathologyTable">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreviousAppointmentsTable_DoctorTable">
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="0..1" />
+          <End Role="PreviousAppointmentsTable" Type="Self.PreviousAppointmentsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorTable">
+              <PropertyRef Name="DoctorID" />
+            </Principal>
+            <Dependent Role="PreviousAppointmentsTable">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreviousAppointmentsTable_HospitalTable">
+          <End Role="HospitalTable" Type="Self.HospitalTable" Multiplicity="0..1" />
+          <End Role="PreviousAppointmentsTable" Type="Self.PreviousAppointmentsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalTable">
+              <PropertyRef Name="HospitalID" />
+            </Principal>
+            <Dependent Role="PreviousAppointmentsTable">
+              <PropertyRef Name="HospitalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreviousAppointmentsTable_UserTable">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
+          <End Role="PreviousAppointmentsTable" Type="Self.PreviousAppointmentsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="PreviousAppointmentsTable">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportTable_DoctorTable">
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="0..1" />
+          <End Role="ReportTable" Type="Self.ReportTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorTable">
+              <PropertyRef Name="DoctorID" />
+            </Principal>
+            <Dependent Role="ReportTable">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportTable_HospitalTable">
+          <End Role="HospitalTable" Type="Self.HospitalTable" Multiplicity="0..1" />
+          <End Role="ReportTable" Type="Self.ReportTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalTable">
+              <PropertyRef Name="HospitalID" />
+            </Principal>
+            <Dependent Role="ReportTable">
+              <PropertyRef Name="HospitalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportTable_UserTable">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
+          <End Role="ReportTable" Type="Self.ReportTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ReportTable">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceTable_HospitalTable">
+          <End Role="HospitalTable" Type="Self.HospitalTable" Multiplicity="1" />
+          <End Role="ServiceTable" Type="Self.ServiceTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalTable">
+              <PropertyRef Name="HospitalID" />
+            </Principal>
+            <Dependent Role="ServiceTable">
+              <PropertyRef Name="HospitalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DoctorCorpsModelStoreContainer">
+          <EntitySet Name="AppointmentsTable" EntityType="Self.AppointmentsTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoctorTable" EntityType="Self.DoctorTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HospitalRatingTable" EntityType="Self.HospitalRatingTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HospitalTable" EntityType="Self.HospitalTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PathologyTable" EntityType="Self.PathologyTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PreviousAppointmentsTable" EntityType="Self.PreviousAppointmentsTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportTable" EntityType="Self.ReportTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceTable" EntityType="Self.ServiceTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTable" EntityType="Self.UserTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AppointmentsTable_DoctorTable" Association="Self.FK_AppointmentsTable_DoctorTable">
+            <End Role="DoctorTable" EntitySet="DoctorTable" />
+            <End Role="AppointmentsTable" EntitySet="AppointmentsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppointmentsTable_HospitalTable" Association="Self.FK_AppointmentsTable_HospitalTable">
+            <End Role="HospitalTable" EntitySet="HospitalTable" />
+            <End Role="AppointmentsTable" EntitySet="AppointmentsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppointmentsTable_UserTable" Association="Self.FK_AppointmentsTable_UserTable">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="AppointmentsTable" EntitySet="AppointmentsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorTable_ServiceTable" Association="Self.FK_DoctorTable_ServiceTable">
+            <End Role="ServiceTable" EntitySet="ServiceTable" />
+            <End Role="DoctorTable" EntitySet="DoctorTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HospitalRatingTable_HospitalTable" Association="Self.FK_HospitalRatingTable_HospitalTable">
+            <End Role="HospitalTable" EntitySet="HospitalTable" />
+            <End Role="HospitalRatingTable" EntitySet="HospitalRatingTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HospitalRatingTable_UserTable" Association="Self.FK_HospitalRatingTable_UserTable">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="HospitalRatingTable" EntitySet="HospitalRatingTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PathologyTable_DoctorTable" Association="Self.FK_PathologyTable_DoctorTable">
+            <End Role="DoctorTable" EntitySet="DoctorTable" />
+            <End Role="PathologyTable" EntitySet="PathologyTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PathologyTable_ServiceTable" Association="Self.FK_PathologyTable_ServiceTable">
+            <End Role="ServiceTable" EntitySet="ServiceTable" />
+            <End Role="PathologyTable" EntitySet="PathologyTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreviousAppointmentsTable_DoctorTable" Association="Self.FK_PreviousAppointmentsTable_DoctorTable">
+            <End Role="DoctorTable" EntitySet="DoctorTable" />
+            <End Role="PreviousAppointmentsTable" EntitySet="PreviousAppointmentsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreviousAppointmentsTable_HospitalTable" Association="Self.FK_PreviousAppointmentsTable_HospitalTable">
+            <End Role="HospitalTable" EntitySet="HospitalTable" />
+            <End Role="PreviousAppointmentsTable" EntitySet="PreviousAppointmentsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreviousAppointmentsTable_UserTable" Association="Self.FK_PreviousAppointmentsTable_UserTable">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="PreviousAppointmentsTable" EntitySet="PreviousAppointmentsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportTable_DoctorTable" Association="Self.FK_ReportTable_DoctorTable">
+            <End Role="DoctorTable" EntitySet="DoctorTable" />
+            <End Role="ReportTable" EntitySet="ReportTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportTable_HospitalTable" Association="Self.FK_ReportTable_HospitalTable">
+            <End Role="HospitalTable" EntitySet="HospitalTable" />
+            <End Role="ReportTable" EntitySet="ReportTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportTable_UserTable" Association="Self.FK_ReportTable_UserTable">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="ReportTable" EntitySet="ReportTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceTable_HospitalTable" Association="Self.FK_ServiceTable_HospitalTable">
+            <End Role="HospitalTable" EntitySet="HospitalTable" />
+            <End Role="ServiceTable" EntitySet="ServiceTable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DoctorCorpsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AppointmentsTable">
+          <Key>
+            <PropertyRef Name="AppiontmentID" />
+          </Key>
+          <Property Name="AppiontmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppliedFor" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="AppliedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FeeStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsConfirmed" Type="Boolean" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="HospitalID" Type="Int32" />
+          <Property Name="DoctorID" Type="Int32" />
+          <NavigationProperty Name="DoctorTable" Relationship="Self.FK_AppointmentsTable_DoctorTable" FromRole="AppointmentsTable" ToRole="DoctorTable" />
+          <NavigationProperty Name="HospitalTable" Relationship="Self.FK_AppointmentsTable_HospitalTable" FromRole="AppointmentsTable" ToRole="HospitalTable" />
+          <NavigationProperty Name="UserTable" Relationship="Self.FK_AppointmentsTable_UserTable" FromRole="AppointmentsTable" ToRole="UserTable" />
+        </EntityType>
+        <EntityType Name="DoctorTable">
+          <Key>
+            <PropertyRef Name="DoctorID" />
+          </Key>
+          <Property Name="DoctorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DoctorRegNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AboutDoctor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorFees" Type="Int32" />
+          <Property Name="DoctorEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ServiceID" Type="Int32" />
+          <NavigationProperty Name="AppointmentsTable" Relationship="Self.FK_AppointmentsTable_DoctorTable" FromRole="DoctorTable" ToRole="AppointmentsTable" />
+          <NavigationProperty Name="ServiceTable" Relationship="Self.FK_DoctorTable_ServiceTable" FromRole="DoctorTable" ToRole="ServiceTable" />
+          <NavigationProperty Name="PathologyTable" Relationship="Self.FK_PathologyTable_DoctorTable" FromRole="DoctorTable" ToRole="PathologyTable" />
+          <NavigationProperty Name="PreviousAppointmentsTable" Relationship="Self.FK_PreviousAppointmentsTable_DoctorTable" FromRole="DoctorTable" ToRole="PreviousAppointmentsTable" />
+          <NavigationProperty Name="ReportTable" Relationship="Self.FK_ReportTable_DoctorTable" FromRole="DoctorTable" ToRole="ReportTable" />
+        </EntityType>
+        <EntityType Name="HospitalRatingTable">
+          <Key>
+            <PropertyRef Name="RatingID" />
+          </Key>
+          <Property Name="RatingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HospitalID" Type="Int32" Nullable="false" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="HospitalTable" Relationship="Self.FK_HospitalRatingTable_HospitalTable" FromRole="HospitalRatingTable" ToRole="HospitalTable" />
+          <NavigationProperty Name="UserTable" Relationship="Self.FK_HospitalRatingTable_UserTable" FromRole="HospitalRatingTable" ToRole="UserTable" />
+        </EntityType>
+        <EntityType Name="HospitalTable">
+          <Key>
+            <PropertyRef Name="HospitalID" />
+          </Key>
+          <Property Name="HospitalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HospitalName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HospitalAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HospitalLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HospitalEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HospitalPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AboutHospital" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AverageRating" Type="Double" />
+          <NavigationProperty Name="AppointmentsTable" Relationship="Self.FK_AppointmentsTable_HospitalTable" FromRole="HospitalTable" ToRole="AppointmentsTable" />
+          <NavigationProperty Name="HospitalRatingTable" Relationship="Self.FK_HospitalRatingTable_HospitalTable" FromRole="HospitalTable" ToRole="HospitalRatingTable" />
+          <NavigationProperty Name="PreviousAppointmentsTable" Relationship="Self.FK_PreviousAppointmentsTable_HospitalTable" FromRole="HospitalTable" ToRole="PreviousAppointmentsTable" />
+          <NavigationProperty Name="ReportTable" Relationship="Self.FK_ReportTable_HospitalTable" FromRole="HospitalTable" ToRole="ReportTable" />
+          <NavigationProperty Name="ServiceTable" Relationship="Self.FK_ServiceTable_HospitalTable" FromRole="HospitalTable" ToRole="ServiceTable" />
+        </EntityType>
+        <EntityType Name="PathologyTable">
+          <Key>
+            <PropertyRef Name="PathologyID" />
+          </Key>
+          <Property Name="PathologyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PathologyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PathologyFees" Type="Int32" Nullable="false" />
+          <Property Name="PatholgyDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorID" Type="Int32" />
+          <Property Name="ServiceID" Type="Int32" />
+          <NavigationProperty Name="DoctorTable" Relationship="Self.FK_PathologyTable_DoctorTable" FromRole="PathologyTable" ToRole="DoctorTable" />
+          <NavigationProperty Name="ServiceTable" Relationship="Self.FK_PathologyTable_ServiceTable" FromRole="PathologyTable" ToRole="ServiceTable" />
+        </EntityType>
+        <EntityType Name="PreviousAppointmentsTable">
+          <Key>
+            <PropertyRef Name="PAID" />
+          </Key>
+          <Property Name="PAID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="HospitalID" Type="Int32" />
+          <Property Name="DoctorID" Type="Int32" />
+          <NavigationProperty Name="DoctorTable" Relationship="Self.FK_PreviousAppointmentsTable_DoctorTable" FromRole="PreviousAppointmentsTable" ToRole="DoctorTable" />
+          <NavigationProperty Name="HospitalTable" Relationship="Self.FK_PreviousAppointmentsTable_HospitalTable" FromRole="PreviousAppointmentsTable" ToRole="HospitalTable" />
+          <NavigationProperty Name="UserTable" Relationship="Self.FK_PreviousAppointmentsTable_UserTable" FromRole="PreviousAppointmentsTable" ToRole="UserTable" />
+        </EntityType>
+        <EntityType Name="ReportTable">
+          <Key>
+            <PropertyRef Name="ReportsID" />
+          </Key>
+          <Property Name="ReportsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HospitalID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="DoctorID" Type="Int32" />
+          <Property Name="Files" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DoctorTable" Relationship="Self.FK_ReportTable_DoctorTable" FromRole="ReportTable" ToRole="DoctorTable" />
+          <NavigationProperty Name="HospitalTable" Relationship="Self.FK_ReportTable_HospitalTable" FromRole="ReportTable" ToRole="HospitalTable" />
+          <NavigationProperty Name="UserTable" Relationship="Self.FK_ReportTable_UserTable" FromRole="ReportTable" ToRole="UserTable" />
+        </EntityType>
+        <EntityType Name="ServiceTable">
+          <Key>
+            <PropertyRef Name="ServiceID" />
+          </Key>
+          <Property Name="ServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HospitalID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DoctorTable" Relationship="Self.FK_DoctorTable_ServiceTable" FromRole="ServiceTable" ToRole="DoctorTable" />
+          <NavigationProperty Name="HospitalTable" Relationship="Self.FK_ServiceTable_HospitalTable" FromRole="ServiceTable" ToRole="HospitalTable" />
+          <NavigationProperty Name="PathologyTable" Relationship="Self.FK_PathologyTable_ServiceTable" FromRole="ServiceTable" ToRole="PathologyTable" />
+        </EntityType>
+        <EntityType Name="UserTable">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserGender" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="UserDOB" Type="DateTime" Precision="0" />
+          <Property Name="MedicalHistory" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AadharNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsAccountVerified" Type="Boolean" />
+          <Property Name="IsAadharVerified" Type="Boolean" />
+          <Property Name="OTP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AppointmentsTable" Relationship="Self.FK_AppointmentsTable_UserTable" FromRole="UserTable" ToRole="AppointmentsTable" />
+          <NavigationProperty Name="HospitalRatingTable" Relationship="Self.FK_HospitalRatingTable_UserTable" FromRole="UserTable" ToRole="HospitalRatingTable" />
+          <NavigationProperty Name="PreviousAppointmentsTable" Relationship="Self.FK_PreviousAppointmentsTable_UserTable" FromRole="UserTable" ToRole="PreviousAppointmentsTable" />
+          <NavigationProperty Name="ReportTable" Relationship="Self.FK_ReportTable_UserTable" FromRole="UserTable" ToRole="ReportTable" />
+        </EntityType>
+        <Association Name="FK_AppointmentsTable_DoctorTable">
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="0..1" />
+          <End Role="AppointmentsTable" Type="Self.AppointmentsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorTable">
+              <PropertyRef Name="DoctorID" />
+            </Principal>
+            <Dependent Role="AppointmentsTable">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppointmentsTable_HospitalTable">
+          <End Role="HospitalTable" Type="Self.HospitalTable" Multiplicity="0..1" />
+          <End Role="AppointmentsTable" Type="Self.AppointmentsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalTable">
+              <PropertyRef Name="HospitalID" />
+            </Principal>
+            <Dependent Role="AppointmentsTable">
+              <PropertyRef Name="HospitalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppointmentsTable_UserTable">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
+          <End Role="AppointmentsTable" Type="Self.AppointmentsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="AppointmentsTable">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorTable_ServiceTable">
+          <End Role="ServiceTable" Type="Self.ServiceTable" Multiplicity="0..1" />
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceTable">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="DoctorTable">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PathologyTable_DoctorTable">
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="0..1" />
+          <End Role="PathologyTable" Type="Self.PathologyTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorTable">
+              <PropertyRef Name="DoctorID" />
+            </Principal>
+            <Dependent Role="PathologyTable">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreviousAppointmentsTable_DoctorTable">
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="0..1" />
+          <End Role="PreviousAppointmentsTable" Type="Self.PreviousAppointmentsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorTable">
+              <PropertyRef Name="DoctorID" />
+            </Principal>
+            <Dependent Role="PreviousAppointmentsTable">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportTable_DoctorTable">
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="0..1" />
+          <End Role="ReportTable" Type="Self.ReportTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorTable">
+              <PropertyRef Name="DoctorID" />
+            </Principal>
+            <Dependent Role="ReportTable">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HospitalRatingTable_HospitalTable">
+          <End Role="HospitalTable" Type="Self.HospitalTable" Multiplicity="1" />
+          <End Role="HospitalRatingTable" Type="Self.HospitalRatingTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalTable">
+              <PropertyRef Name="HospitalID" />
+            </Principal>
+            <Dependent Role="HospitalRatingTable">
+              <PropertyRef Name="HospitalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HospitalRatingTable_UserTable">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
+          <End Role="HospitalRatingTable" Type="Self.HospitalRatingTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="HospitalRatingTable">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreviousAppointmentsTable_HospitalTable">
+          <End Role="HospitalTable" Type="Self.HospitalTable" Multiplicity="0..1" />
+          <End Role="PreviousAppointmentsTable" Type="Self.PreviousAppointmentsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalTable">
+              <PropertyRef Name="HospitalID" />
+            </Principal>
+            <Dependent Role="PreviousAppointmentsTable">
+              <PropertyRef Name="HospitalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportTable_HospitalTable">
+          <End Role="HospitalTable" Type="Self.HospitalTable" Multiplicity="0..1" />
+          <End Role="ReportTable" Type="Self.ReportTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalTable">
+              <PropertyRef Name="HospitalID" />
+            </Principal>
+            <Dependent Role="ReportTable">
+              <PropertyRef Name="HospitalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceTable_HospitalTable">
+          <End Role="HospitalTable" Type="Self.HospitalTable" Multiplicity="1" />
+          <End Role="ServiceTable" Type="Self.ServiceTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalTable">
+              <PropertyRef Name="HospitalID" />
+            </Principal>
+            <Dependent Role="ServiceTable">
+              <PropertyRef Name="HospitalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PathologyTable_ServiceTable">
+          <End Role="ServiceTable" Type="Self.ServiceTable" Multiplicity="0..1" />
+          <End Role="PathologyTable" Type="Self.PathologyTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceTable">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="PathologyTable">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreviousAppointmentsTable_UserTable">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
+          <End Role="PreviousAppointmentsTable" Type="Self.PreviousAppointmentsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="PreviousAppointmentsTable">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportTable_UserTable">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
+          <End Role="ReportTable" Type="Self.ReportTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ReportTable">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DoctorCorpsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AppointmentsTable" EntityType="Self.AppointmentsTable" />
+          <EntitySet Name="DoctorTable" EntityType="Self.DoctorTable" />
+          <EntitySet Name="HospitalRatingTable" EntityType="Self.HospitalRatingTable" />
+          <EntitySet Name="HospitalTable" EntityType="Self.HospitalTable" />
+          <EntitySet Name="PathologyTable" EntityType="Self.PathologyTable" />
+          <EntitySet Name="PreviousAppointmentsTable" EntityType="Self.PreviousAppointmentsTable" />
+          <EntitySet Name="ReportTable" EntityType="Self.ReportTable" />
+          <EntitySet Name="ServiceTable" EntityType="Self.ServiceTable" />
+          <EntitySet Name="UserTable" EntityType="Self.UserTable" />
+          <AssociationSet Name="FK_AppointmentsTable_DoctorTable" Association="Self.FK_AppointmentsTable_DoctorTable">
+            <End Role="DoctorTable" EntitySet="DoctorTable" />
+            <End Role="AppointmentsTable" EntitySet="AppointmentsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppointmentsTable_HospitalTable" Association="Self.FK_AppointmentsTable_HospitalTable">
+            <End Role="HospitalTable" EntitySet="HospitalTable" />
+            <End Role="AppointmentsTable" EntitySet="AppointmentsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppointmentsTable_UserTable" Association="Self.FK_AppointmentsTable_UserTable">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="AppointmentsTable" EntitySet="AppointmentsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorTable_ServiceTable" Association="Self.FK_DoctorTable_ServiceTable">
+            <End Role="ServiceTable" EntitySet="ServiceTable" />
+            <End Role="DoctorTable" EntitySet="DoctorTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PathologyTable_DoctorTable" Association="Self.FK_PathologyTable_DoctorTable">
+            <End Role="DoctorTable" EntitySet="DoctorTable" />
+            <End Role="PathologyTable" EntitySet="PathologyTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreviousAppointmentsTable_DoctorTable" Association="Self.FK_PreviousAppointmentsTable_DoctorTable">
+            <End Role="DoctorTable" EntitySet="DoctorTable" />
+            <End Role="PreviousAppointmentsTable" EntitySet="PreviousAppointmentsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportTable_DoctorTable" Association="Self.FK_ReportTable_DoctorTable">
+            <End Role="DoctorTable" EntitySet="DoctorTable" />
+            <End Role="ReportTable" EntitySet="ReportTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HospitalRatingTable_HospitalTable" Association="Self.FK_HospitalRatingTable_HospitalTable">
+            <End Role="HospitalTable" EntitySet="HospitalTable" />
+            <End Role="HospitalRatingTable" EntitySet="HospitalRatingTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HospitalRatingTable_UserTable" Association="Self.FK_HospitalRatingTable_UserTable">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="HospitalRatingTable" EntitySet="HospitalRatingTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreviousAppointmentsTable_HospitalTable" Association="Self.FK_PreviousAppointmentsTable_HospitalTable">
+            <End Role="HospitalTable" EntitySet="HospitalTable" />
+            <End Role="PreviousAppointmentsTable" EntitySet="PreviousAppointmentsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportTable_HospitalTable" Association="Self.FK_ReportTable_HospitalTable">
+            <End Role="HospitalTable" EntitySet="HospitalTable" />
+            <End Role="ReportTable" EntitySet="ReportTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceTable_HospitalTable" Association="Self.FK_ServiceTable_HospitalTable">
+            <End Role="HospitalTable" EntitySet="HospitalTable" />
+            <End Role="ServiceTable" EntitySet="ServiceTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PathologyTable_ServiceTable" Association="Self.FK_PathologyTable_ServiceTable">
+            <End Role="ServiceTable" EntitySet="ServiceTable" />
+            <End Role="PathologyTable" EntitySet="PathologyTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreviousAppointmentsTable_UserTable" Association="Self.FK_PreviousAppointmentsTable_UserTable">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="PreviousAppointmentsTable" EntitySet="PreviousAppointmentsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportTable_UserTable" Association="Self.FK_ReportTable_UserTable">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="ReportTable" EntitySet="ReportTable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DoctorCorpsModelStoreContainer" CdmEntityContainer="DoctorCorpsEntities">
+          <EntitySetMapping Name="AppointmentsTable">
+            <EntityTypeMapping TypeName="DoctorCorpsModel.AppointmentsTable">
+              <MappingFragment StoreEntitySet="AppointmentsTable">
+                <ScalarProperty Name="AppiontmentID" ColumnName="AppiontmentID" />
+                <ScalarProperty Name="AppliedFor" ColumnName="AppliedFor" />
+                <ScalarProperty Name="AppliedOn" ColumnName="AppliedOn" />
+                <ScalarProperty Name="FeeStatus" ColumnName="FeeStatus" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoctorTable">
+            <EntityTypeMapping TypeName="DoctorCorpsModel.DoctorTable">
+              <MappingFragment StoreEntitySet="DoctorTable">
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="DoctorName" ColumnName="DoctorName" />
+                <ScalarProperty Name="DoctorRegNo" ColumnName="DoctorRegNo" />
+                <ScalarProperty Name="AboutDoctor" ColumnName="AboutDoctor" />
+                <ScalarProperty Name="DoctorFees" ColumnName="DoctorFees" />
+                <ScalarProperty Name="DoctorEmail" ColumnName="DoctorEmail" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HospitalRatingTable">
+            <EntityTypeMapping TypeName="DoctorCorpsModel.HospitalRatingTable">
+              <MappingFragment StoreEntitySet="HospitalRatingTable">
+                <ScalarProperty Name="RatingID" ColumnName="RatingID" />
+                <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HospitalTable">
+            <EntityTypeMapping TypeName="DoctorCorpsModel.HospitalTable">
+              <MappingFragment StoreEntitySet="HospitalTable">
+                <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+                <ScalarProperty Name="HospitalName" ColumnName="HospitalName" />
+                <ScalarProperty Name="HospitalAddress" ColumnName="HospitalAddress" />
+                <ScalarProperty Name="HospitalLocation" ColumnName="HospitalLocation" />
+                <ScalarProperty Name="HospitalEmail" ColumnName="HospitalEmail" />
+                <ScalarProperty Name="HospitalPhone" ColumnName="HospitalPhone" />
+                <ScalarProperty Name="AboutHospital" ColumnName="AboutHospital" />
+                <ScalarProperty Name="AverageRating" ColumnName="AverageRating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PathologyTable">
+            <EntityTypeMapping TypeName="DoctorCorpsModel.PathologyTable">
+              <MappingFragment StoreEntitySet="PathologyTable">
+                <ScalarProperty Name="PathologyID" ColumnName="PathologyID" />
+                <ScalarProperty Name="PathologyName" ColumnName="PathologyName" />
+                <ScalarProperty Name="PathologyFees" ColumnName="PathologyFees" />
+                <ScalarProperty Name="PatholgyDescription" ColumnName="PatholgyDescription" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PreviousAppointmentsTable">
+            <EntityTypeMapping TypeName="DoctorCorpsModel.PreviousAppointmentsTable">
+              <MappingFragment StoreEntitySet="PreviousAppointmentsTable">
+                <ScalarProperty Name="PAID" ColumnName="PAID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportTable">
+            <EntityTypeMapping TypeName="DoctorCorpsModel.ReportTable">
+              <MappingFragment StoreEntitySet="ReportTable">
+                <ScalarProperty Name="ReportsID" ColumnName="ReportsID" />
+                <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="Files" ColumnName="Files" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceTable">
+            <EntityTypeMapping TypeName="DoctorCorpsModel.ServiceTable">
+              <MappingFragment StoreEntitySet="ServiceTable">
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTable">
+            <EntityTypeMapping TypeName="DoctorCorpsModel.UserTable">
+              <MappingFragment StoreEntitySet="UserTable">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+                <ScalarProperty Name="UserGender" ColumnName="UserGender" />
+                <ScalarProperty Name="UserDOB" ColumnName="UserDOB" />
+                <ScalarProperty Name="MedicalHistory" ColumnName="MedicalHistory" />
+                <ScalarProperty Name="UserLocation" ColumnName="UserLocation" />
+                <ScalarProperty Name="AadharNo" ColumnName="AadharNo" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsAccountVerified" ColumnName="IsAccountVerified" />
+                <ScalarProperty Name="IsAadharVerified" ColumnName="IsAadharVerified" />
+                <ScalarProperty Name="OTP" ColumnName="OTP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
