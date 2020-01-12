@@ -95,7 +95,7 @@ namespace DoctorCorps.Models
 
         public void ResendOTP(int Userid)
         {
-            using(DoctorCorpsEntities context = new DoctorCorpsEntities())
+            using (DoctorCorpsEntities context = new DoctorCorpsEntities())
             {
                 UserTable user = new UserTable();
                 user = context.UserTable.FirstOrDefault(m => m.UserID == Userid);
@@ -103,6 +103,15 @@ namespace DoctorCorps.Models
                 user.OTPDateTime = DateTime.Now;
                 context.SaveChanges();
                 new SmsService().Messages(new SmsService().Mssg(user, user.OTP));
+            }
+        }
+
+        public bool IsEmailExist(string Email)
+        {
+            using (DoctorCorpsEntities context = new DoctorCorpsEntities())
+            {
+                var v = context.UserTable.Where(a => a.UserEmail == Email).FirstOrDefault();
+                return v != null;
             }
         }
     }

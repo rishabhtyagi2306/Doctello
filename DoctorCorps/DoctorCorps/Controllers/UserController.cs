@@ -15,8 +15,14 @@ namespace DoctorCorps.Controllers
         [Route("api/User/Signup")]
         public HttpResponseMessage UserSignup([FromBody]UserTable user)
         {
-            new UserModel().AddUser(user);
-            return Request.CreateResponse(HttpStatusCode.Created, "An OTP has been sent to your phone number, please verify it to continue access");
+            bool x = new UserModel().IsEmailExist(user.UserEmail);
+            if (x)
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Account already exists");
+            else
+            {
+                new UserModel().AddUser(user);
+                return Request.CreateResponse(HttpStatusCode.Created, "An OTP has been sent to your phone number, please verify it to continue access");
+            }
 
         }
 
@@ -43,5 +49,13 @@ namespace DoctorCorps.Controllers
             new UserModel().ResendOTP(Userid);
             return Request.CreateResponse(HttpStatusCode.OK, "An OTP has been sent to your phone number, Please verify it to continue access");
         }
+
+
+        //[HttpPost]
+        //[Route("api/User/Login")]
+        //public HttpResponseMessage UserLogin([FromBody]UserModel model)
+        //{
+
+        //}
     }
 }
