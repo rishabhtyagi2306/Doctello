@@ -92,6 +92,19 @@ namespace DoctorCorps.Models
                     return false;
             }
         }
+
+        public void ResendOTP(int Userid)
+        {
+            using(DoctorCorpsEntities context = new DoctorCorpsEntities())
+            {
+                UserTable user = new UserTable();
+                user = context.UserTable.FirstOrDefault(m => m.UserID == Userid);
+                user.OTP = Convert.ToString(GenerateOTP());
+                user.OTPDateTime = DateTime.Now;
+                context.SaveChanges();
+                new SmsService().Messages(new SmsService().Mssg(user, user.OTP));
+            }
+        }
     }
 
     public class SmsService : IIdentityMessageService

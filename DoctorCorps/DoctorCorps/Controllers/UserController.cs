@@ -16,7 +16,7 @@ namespace DoctorCorps.Controllers
         public HttpResponseMessage UserSignup([FromBody]UserTable user)
         {
             new UserModel().AddUser(user);
-            return Request.CreateResponse(HttpStatusCode.Created, "An OTP has been sent to your phone no please verify it to continue access");
+            return Request.CreateResponse(HttpStatusCode.Created, "An OTP has been sent to your phone number, please verify it to continue access");
 
         }
 
@@ -34,6 +34,14 @@ namespace DoctorCorps.Controllers
                 else
                     return Request.CreateResponse(HttpStatusCode.NotFound, "Please Enter correct OTP");
             }
+        }
+
+        [HttpPut]
+        [Route("api/User/ResendOTP/{Userid}")]
+        public HttpResponseMessage ResendOTP(int Userid)
+        {
+            new UserModel().ResendOTP(Userid);
+            return Request.CreateResponse(HttpStatusCode.OK, "An OTP has been sent to your phone number, Please verify it to continue access");
         }
     }
 }
