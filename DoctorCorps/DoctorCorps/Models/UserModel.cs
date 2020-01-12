@@ -60,6 +60,38 @@ namespace DoctorCorps.Models
                 new SmsService().Messages(new SmsService().Mssg(user, user.OTP));
             }
         }
+
+        public bool IsOTPVerified(int uid)
+        {
+            using(DoctorCorpsEntities context = new DoctorCorpsEntities())
+            {
+                UserTable user = new UserTable();
+                user = context.UserTable.FirstOrDefault(m => m.UserID == uid);
+                TimeSpan s = (TimeSpan)(DateTime.Now - user.OTPDateTime);
+                if (s.TotalMinutes <= 2)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        public bool EnterOTP(UserModel model, int uid)
+        {
+            using(DoctorCorpsEntities context = new DoctorCorpsEntities())
+            {
+                UserTable user = new UserTable();
+                user = context.UserTable.FirstOrDefault(m => m.UserID == uid);
+                bool x = IsOTPVerified(uid);
+                if (user.OTP == model.OTP && x)
+                {
+                    user.IsAccountVerified = true;
+                    context.SaveChanges();
+                    return true;
+                }
+                else
+                    return false;
+            }
+        }
     }
 
     public class SmsService : IIdentityMessageService
