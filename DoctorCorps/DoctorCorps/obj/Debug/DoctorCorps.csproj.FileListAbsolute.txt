@@ -95,3 +95,5 @@ C:\Users\hp\source\repos\DoctorCorps\DoctorCorps\obj\Debug\DoctorCorps.csprojAss
 C:\Users\hp\source\repos\DoctorCorps\DoctorCorps\obj\Debug\DoctorCorps.csproj.CopyComplete
 C:\Users\hp\source\repos\DoctorCorps\DoctorCorps\obj\Debug\DoctorCorps.dll
 C:\Users\hp\source\repos\DoctorCorps\DoctorCorps\obj\Debug\DoctorCorps.pdb
+C:\Users\hp\source\repos\DoctorCorps\DoctorCorps\bin\Swashbuckle.Core.dll
+C:\Users\hp\source\repos\DoctorCorps\DoctorCorps\bin\WebActivatorEx.dll

@@ -114,6 +114,39 @@ namespace DoctorCorps.Models
                 return v != null;
             }
         }
+
+        public UserTable GetUser(string username)
+        {
+            try
+            {
+                using(DoctorCorpsEntities context = new DoctorCorpsEntities())
+                {
+                    return context.UserTable.FirstOrDefault(user => user.UserEmail.Equals(username));
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public bool verification(string Email)
+        {
+            DoctorCorpsEntities context = new DoctorCorpsEntities();
+            UserTable Fac = new UserTable();
+            Fac = context.UserTable.SingleOrDefault(m => m.UserEmail == Email);
+            var y = Convert.ToBoolean(Fac.IsAccountVerified);
+            return y;
+        }
+
+        public string password(string Email)
+        {
+            DoctorCorpsEntities context = new DoctorCorpsEntities();
+            UserTable us = new UserTable();
+            us = context.UserTable.SingleOrDefault(x => x.UserEmail == Email);
+            string pass = Convert.ToString(us.Password);
+            return pass;
+        }
     }
 
     public class SmsService : IIdentityMessageService

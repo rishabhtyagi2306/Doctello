@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web.Helpers;
 using System.Web.Http;
 
 namespace DoctorCorps.Controllers
@@ -51,11 +52,23 @@ namespace DoctorCorps.Controllers
         }
 
 
-        //[HttpPost]
-        //[Route("api/User/Login")]
-        //public HttpResponseMessage UserLogin([FromBody]UserModel model)
-        //{
+        [HttpPost]
+        [Route("api/User/Login")]
+        public HttpResponseMessage UserLogin([FromBody]UserModel model)
+        {
+            
+            UserTable u = new UserModel().GetUser(model.UserEmail);
 
-        //}
+            if (u == null)
+                return Request.CreateResponse(HttpStatusCode.NotFound,"The Account was not found.");
+            var y = new UserModel().verification(model.UserEmail);
+            var password = new UserModel().password(model.UserEmail);
+            string pass = Crypto.Hash(model.Password);
+            bool credentials = pass.Equals(password);
+            if (credentials && y)
+                return Request.CreateResponse(HttpStatusCode.OK, TokenManager.GenerateToken(model.UserEmail));
+            else
+                return Request.CreateResponse(HttpStatusCode.Forbidden, "The email/password combination was wrong.");
+        }
     }
 }
