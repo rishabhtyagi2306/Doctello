@@ -97,3 +97,6 @@ C:\Users\hp\source\repos\DoctorCorps\DoctorCorps\obj\Debug\DoctorCorps.dll
 C:\Users\hp\source\repos\DoctorCorps\DoctorCorps\obj\Debug\DoctorCorps.pdb
 C:\Users\hp\source\repos\DoctorCorps\DoctorCorps\bin\Swashbuckle.Core.dll
 C:\Users\hp\source\repos\DoctorCorps\DoctorCorps\bin\WebActivatorEx.dll
+C:\Users\hp\source\repos\DoctorCorps\DoctorCorps\bin\System.Web.Cors.dll
+C:\Users\hp\source\repos\DoctorCorps\DoctorCorps\bin\System.Web.Http.Cors.dll
+C:\Users\hp\source\repos\DoctorCorps\DoctorCorps\bin\System.Web.Http.Cors.xml
