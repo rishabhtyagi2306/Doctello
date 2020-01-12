@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Helpers;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 using Twilio.Types;
@@ -42,6 +43,7 @@ namespace DoctorCorps.Models
             UserTable us = new UserTable();
             using(DoctorCorpsEntities db = new DoctorCorpsEntities())
             {
+                user.Password = Crypto.Hash(user.Password);
                 db.UserTable.Add(user);
                 db.SaveChanges();
             }

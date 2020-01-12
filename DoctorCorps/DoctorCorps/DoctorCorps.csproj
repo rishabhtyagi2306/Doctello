@@ -188,6 +188,7 @@
     <Compile Include="HospitalTable.cs">
       <DependentUpon>DoctorCorpsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Crypto.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="PathologyTable.cs">
       <DependentUpon>DoctorCorpsModel.tt</DependentUpon>
