@@ -91,15 +91,15 @@
       <PropertyRef Name="UserID" />
     </Key>
     <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="UserEmail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserEmail" Type="nvarchar(max)" />
     <Property Name="UserPhone" Type="nvarchar(max)" Nullable="false" />
     <Property Name="UserGender" Type="char" MaxLength="10" />
     <Property Name="UserDOB" Type="date" />
     <Property Name="MedicalHistory" Type="nvarchar(max)" />
     <Property Name="UserLocation" Type="nvarchar(max)" />
     <Property Name="AadharNo" Type="nvarchar(max)" />
-    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" />
     <Property Name="IsAccountVerified" Type="bit" />
     <Property Name="IsAadharVerified" Type="bit" />
     <Property Name="OTP" Type="nvarchar(max)" />

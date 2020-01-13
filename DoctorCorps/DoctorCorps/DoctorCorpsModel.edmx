@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DoctorCorpsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DoctorCorpsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AppointmentsTable">
           <Key>
             <PropertyRef Name="AppiontmentID" />
@@ -96,15 +96,15 @@
             <PropertyRef Name="UserID" />
           </Key>
           <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="UserEmail" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserEmail" Type="nvarchar(max)" />
           <Property Name="UserPhone" Type="nvarchar(max)" Nullable="false" />
           <Property Name="UserGender" Type="char" MaxLength="10" />
           <Property Name="UserDOB" Type="date" />
           <Property Name="MedicalHistory" Type="nvarchar(max)" />
           <Property Name="UserLocation" Type="nvarchar(max)" />
           <Property Name="AadharNo" Type="nvarchar(max)" />
-          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" />
           <Property Name="IsAccountVerified" Type="bit" />
           <Property Name="IsAadharVerified" Type="bit" />
           <Property Name="OTP" Type="nvarchar(max)" />
@@ -361,7 +361,8 @@
             <End Role="ServiceTable" EntitySet="ServiceTable" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DoctorCorpsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -482,23 +483,23 @@
             <PropertyRef Name="UserID" />
           </Key>
           <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UserPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UserGender" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="UserDOB" Type="DateTime" Precision="0" />
           <Property Name="MedicalHistory" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UserLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="AadharNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsAccountVerified" Type="Boolean" />
           <Property Name="IsAadharVerified" Type="Boolean" />
           <Property Name="OTP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OTPDateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="AppointmentsTable" Relationship="Self.FK_AppointmentsTable_UserTable" FromRole="UserTable" ToRole="AppointmentsTable" />
           <NavigationProperty Name="HospitalRatingTable" Relationship="Self.FK_HospitalRatingTable_UserTable" FromRole="UserTable" ToRole="HospitalRatingTable" />
           <NavigationProperty Name="PreviousAppointmentsTable" Relationship="Self.FK_PreviousAppointmentsTable_UserTable" FromRole="UserTable" ToRole="PreviousAppointmentsTable" />
           <NavigationProperty Name="ReportTable" Relationship="Self.FK_ReportTable_UserTable" FromRole="UserTable" ToRole="ReportTable" />
-          <Property Name="OTPDateTime" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_AppointmentsTable_DoctorTable">
           <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="0..1" />
@@ -854,7 +855,6 @@
           <EntitySetMapping Name="UserTable">
             <EntityTypeMapping TypeName="DoctorCorpsModel.UserTable">
               <MappingFragment StoreEntitySet="UserTable">
-                <ScalarProperty Name="OTPDateTime" ColumnName="OTPDateTime" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
@@ -868,6 +868,7 @@
                 <ScalarProperty Name="IsAccountVerified" ColumnName="IsAccountVerified" />
                 <ScalarProperty Name="IsAadharVerified" ColumnName="IsAadharVerified" />
                 <ScalarProperty Name="OTP" ColumnName="OTP" />
+                <ScalarProperty Name="OTPDateTime" ColumnName="OTPDateTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

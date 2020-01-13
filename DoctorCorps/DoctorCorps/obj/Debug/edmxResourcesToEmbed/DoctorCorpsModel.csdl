@@ -117,23 +117,23 @@
       <PropertyRef Name="UserID" />
     </Key>
     <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="UserEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="UserPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="UserGender" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
     <Property Name="UserDOB" Type="DateTime" Precision="0" />
     <Property Name="MedicalHistory" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="UserLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="AadharNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IsAccountVerified" Type="Boolean" />
     <Property Name="IsAadharVerified" Type="Boolean" />
     <Property Name="OTP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OTPDateTime" Type="DateTime" Precision="3" />
     <NavigationProperty Name="AppointmentsTable" Relationship="Self.FK_AppointmentsTable_UserTable" FromRole="UserTable" ToRole="AppointmentsTable" />
     <NavigationProperty Name="HospitalRatingTable" Relationship="Self.FK_HospitalRatingTable_UserTable" FromRole="UserTable" ToRole="HospitalRatingTable" />
     <NavigationProperty Name="PreviousAppointmentsTable" Relationship="Self.FK_PreviousAppointmentsTable_UserTable" FromRole="UserTable" ToRole="PreviousAppointmentsTable" />
     <NavigationProperty Name="ReportTable" Relationship="Self.FK_ReportTable_UserTable" FromRole="UserTable" ToRole="ReportTable" />
-    <Property Name="OTPDateTime" Type="DateTime" Precision="3" />
   </EntityType>
   <Association Name="FK_AppointmentsTable_DoctorTable">
     <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="0..1" />

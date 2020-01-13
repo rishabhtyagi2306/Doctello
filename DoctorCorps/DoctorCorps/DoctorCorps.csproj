@@ -243,8 +243,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="DoctorCorpsModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DoctorCorpsModel.Context.cs</LastGenOutput>
       <DependentUpon>DoctorCorpsModel.edmx</DependentUpon>
+      <LastGenOutput>DoctorCorpsModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="DoctorCorpsModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -257,6 +257,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Connected Services\ASPSMSX2\aspsmsx2.wsdl" />
     <EntityDeploy Include="DoctorCorpsModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DoctorCorpsModel.Designer.cs</LastGenOutput>
@@ -264,7 +265,6 @@
     <Content Include="DoctorCorpsModel.edmx.diagram">
       <DependentUpon>DoctorCorpsModel.edmx</DependentUpon>
     </Content>
-    <None Include="Connected Services\ASPSMSX2\aspsmsx2.wsdl" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

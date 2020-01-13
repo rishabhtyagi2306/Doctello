@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e58c793349844039a6bac1f9ca644731" Name="Diagram1" ZoomLevel="62">
-        <EntityTypeShape EntityType="DoctorCorpsModel.AppointmentsTable" Width="1.5" PointX="8.5" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoctorCorpsModel.DoctorTable" Width="1.5" PointX="13.125" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoctorCorpsModel.HospitalRatingTable" Width="1.5" PointX="4" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoctorCorpsModel.HospitalTable" Width="1.5" PointX="0.875" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoctorCorpsModel.PathologyTable" Width="1.5" PointX="13.125" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoctorCorpsModel.PreviousAppointmentsTable" Width="1.5" PointX="5.875" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoctorCorpsModel.ReportTable" Width="1.5" PointX="8.5" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoctorCorpsModel.ServiceTable" Width="1.5" PointX="17.125" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoctorCorpsModel.UserTable" Width="1.5" PointX="0.875" PointY="1.75" IsExpanded="true" />
+      <Diagram DiagramId="c1ff8618ece040d0bf19dc5a829e7cd8" Name="Diagram1">
+        <EntityTypeShape EntityType="DoctorCorpsModel.AppointmentsTable" Width="1.5" PointX="7.5" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoctorCorpsModel.DoctorTable" Width="1.5" PointX="5.25" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoctorCorpsModel.HospitalRatingTable" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoctorCorpsModel.HospitalTable" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoctorCorpsModel.PathologyTable" Width="1.5" PointX="7.5" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoctorCorpsModel.PreviousAppointmentsTable" Width="1.5" PointX="10.5" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoctorCorpsModel.ReportTable" Width="1.5" PointX="7.5" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoctorCorpsModel.ServiceTable" Width="1.5" PointX="3" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoctorCorpsModel.UserTable" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
         <AssociationConnector Association="DoctorCorpsModel.FK_AppointmentsTable_DoctorTable" ManuallyRouted="false" />
         <AssociationConnector Association="DoctorCorpsModel.FK_AppointmentsTable_HospitalTable" ManuallyRouted="false" />
         <AssociationConnector Association="DoctorCorpsModel.FK_AppointmentsTable_UserTable" ManuallyRouted="false" />

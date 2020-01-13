@@ -13,16 +13,31 @@ namespace DoctorCorps.Controllers
     public class UserController : ApiController
     {
         [HttpPost]
-        [Route("api/User/Signup")]
-        public HttpResponseMessage UserSignup([FromBody]UserTable user)
+        [Route("api/User/AddPhone")]
+        public HttpResponseMessage AddPhone([FromBody]UserTable user)
         {
-            bool x = new UserModel().IsEmailExist(user.UserEmail);
-            if (x)
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "Account already exists");
+            bool y = new UserModel().IsPhoneExist(user.UserPhone);
+            if (y)
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Account already exist with this phone number");
             else
             {
-                new UserModel().AddUser(user);
-                return Request.CreateResponse(HttpStatusCode.Created, "An OTP has been sent to your phone number, please verify it to continue access");
+                int x = new UserModel().AddPhone(user);
+                return Request.CreateResponse(HttpStatusCode.Created, x);
+            }
+        }
+
+
+        [HttpPost]
+        [Route("api/User/EnterDetails/{Userid}")]
+        public HttpResponseMessage UserSignup([FromBody]UserModel model, int Userid)
+        {
+            bool x = new UserModel().IsEmailExist(model.UserEmail);
+            if (x)
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Account already exists with this E-mail");
+            else
+            {
+                new UserModel().AddUser(model, Userid);
+                return Request.CreateResponse(HttpStatusCode.Created, TokenManager.GenerateToken(model.UserEmail));
             }
 
         }
@@ -37,7 +52,7 @@ namespace DoctorCorps.Controllers
                 user = context.UserTable.FirstOrDefault(m => m.UserID == Userid);
                 bool x = new UserModel().EnterOTP(model, Userid);
                 if (x)
-                    return Request.CreateResponse(HttpStatusCode.OK, TokenManager.GenerateToken(user.UserEmail));
+                    return Request.CreateResponse(HttpStatusCode.OK, "OTP entered is correct");
                 else
                     return Request.CreateResponse(HttpStatusCode.NotFound, "Please Enter correct OTP");
             }

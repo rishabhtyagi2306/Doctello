@@ -98,7 +98,6 @@
     <EntitySetMapping Name="UserTable">
       <EntityTypeMapping TypeName="DoctorCorpsModel.UserTable">
         <MappingFragment StoreEntitySet="UserTable">
-          <ScalarProperty Name="OTPDateTime" ColumnName="OTPDateTime" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
@@ -112,6 +111,7 @@
           <ScalarProperty Name="IsAccountVerified" ColumnName="IsAccountVerified" />
           <ScalarProperty Name="IsAadharVerified" ColumnName="IsAadharVerified" />
           <ScalarProperty Name="OTP" ColumnName="OTP" />
+          <ScalarProperty Name="OTPDateTime" ColumnName="OTPDateTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
