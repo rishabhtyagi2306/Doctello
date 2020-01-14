@@ -96,7 +96,6 @@ namespace DoctorCorps.Models
                 user.UserGender = model.UserGender;
                 user.UserDOB = model.UserDOB;
                 user.Password = Crypto.Hash(model.Password);
-                db.UserTable.Add(user);
                 db.SaveChanges();
             }
         }
@@ -186,6 +185,19 @@ namespace DoctorCorps.Models
             us = context.UserTable.SingleOrDefault(x => x.UserEmail == Email);
             string pass = Convert.ToString(us.Password);
             return pass;
+        }
+
+        public void AadharCard(UserModel model, int userid)
+        {
+            using(DoctorCorpsEntities context = new DoctorCorpsEntities())
+            {
+                UserTable user = new UserTable();
+                user = context.UserTable.FirstOrDefault(m => m.UserID == userid);
+                user.AadharNo = model.AadharNo;
+                user.MedicalHistory = model.MedicalHistory;
+                user.IsAadharVerified = true;
+                context.SaveChanges();
+            }
         }
     }
 

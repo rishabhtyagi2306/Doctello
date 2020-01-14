@@ -85,5 +85,30 @@ namespace DoctorCorps.Controllers
             else
                 return Request.CreateResponse(HttpStatusCode.Forbidden, "The email/password combination was wrong.");
         }
+
+        [HttpPost]
+        [Route("api/User/VerifyAadhar")]
+        public HttpResponseMessage VerifyAadhar([FromBody]UserModel model, string token)
+        {
+            if (model.AadharNo.Length == 12)
+            {
+                bool x = AadharCard.validateVerhoeff(model.AadharNo);
+                if (x)
+                {
+                    using (DoctorCorpsEntities context = new DoctorCorpsEntities())
+                    {
+                        UserTable user = new UserTable();
+                        string username = TokenManager.ValidateToken(token);
+                        user = context.UserTable.FirstOrDefault(m => m.UserEmail == username);
+                        new UserModel().AadharCard(model, user.UserID);
+                        return Request.CreateResponse(HttpStatusCode.OK, "Your Aadhar Number is verified");
+                    }
+                }
+                else
+                    return Request.CreateResponse(HttpStatusCode.NotFound, "Please Enter a valid Aadhar number");
+            }
+            else
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Your Aadhar should be 12 digits long");
+        }
     }
 }

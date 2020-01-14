@@ -16,7 +16,7 @@ namespace DoctorCorps
                 .Add(new MediaTypeHeaderValue("text/html"));
             // Web API routes
 
-            var cors = new EnableCorsAttribute("https://3fbf0ba4.ngrok.io", "*", "*");
+            var cors = new EnableCorsAttribute("https://d8d57cf6.ngrok.io", "*", "*");
             config.EnableCors(cors);
 
             config.MapHttpAttributeRoutes();

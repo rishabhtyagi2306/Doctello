@@ -207,6 +207,7 @@
     <Compile Include="HospitalTable.cs">
       <DependentUpon>DoctorCorpsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AadharCard.cs" />
     <Compile Include="Models\Crypto.cs" />
     <Compile Include="Models\TokenManager.cs" />
     <Compile Include="Models\UserModel.cs" />
