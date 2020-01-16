@@ -25,6 +25,10 @@
           <ScalarProperty Name="DoctorFees" ColumnName="DoctorFees" />
           <ScalarProperty Name="DoctorEmail" ColumnName="DoctorEmail" />
           <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+          <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+          <ScalarProperty Name="AvailableDay" ColumnName="AvailableDay" />
+          <ScalarProperty Name="AvailableTimeMorning" ColumnName="AvailableTimeMorning" />
+          <ScalarProperty Name="AvailableTimeEvening" ColumnName="AvailableTimeEvening" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -39,6 +43,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="HospitalServiceTable">
+      <EntityTypeMapping TypeName="DoctorCorpsModel.HospitalServiceTable">
+        <MappingFragment StoreEntitySet="HospitalServiceTable">
+          <ScalarProperty Name="HSID" ColumnName="HSID" />
+          <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="HospitalTable">
       <EntityTypeMapping TypeName="DoctorCorpsModel.HospitalTable">
         <MappingFragment StoreEntitySet="HospitalTable">
@@ -50,6 +63,7 @@
           <ScalarProperty Name="HospitalPhone" ColumnName="HospitalPhone" />
           <ScalarProperty Name="AboutHospital" ColumnName="AboutHospital" />
           <ScalarProperty Name="AverageRating" ColumnName="AverageRating" />
+          <ScalarProperty Name="HospitalImage" ColumnName="HospitalImage" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -61,7 +75,7 @@
           <ScalarProperty Name="PathologyFees" ColumnName="PathologyFees" />
           <ScalarProperty Name="PatholgyDescription" ColumnName="PatholgyDescription" />
           <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
-          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+          <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -91,7 +105,6 @@
         <MappingFragment StoreEntitySet="ServiceTable">
           <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
           <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
-          <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -30,9 +30,14 @@ namespace DoctorCorps
         public Nullable<int> DoctorFees { get; set; }
         public string DoctorEmail { get; set; }
         public Nullable<int> ServiceID { get; set; }
+        public Nullable<int> HospitalID { get; set; }
+        public string AvailableDay { get; set; }
+        public string AvailableTimeMorning { get; set; }
+        public string AvailableTimeEvening { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AppointmentsTable> AppointmentsTable { get; set; }
+        public virtual HospitalTable HospitalTable { get; set; }
         public virtual ServiceTable ServiceTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PathologyTable> PathologyTable { get; set; }

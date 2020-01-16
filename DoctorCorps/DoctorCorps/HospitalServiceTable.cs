@@ -12,16 +12,13 @@ namespace DoctorCorps
     using System;
     using System.Collections.Generic;
     
-    public partial class PathologyTable
+    public partial class HospitalServiceTable
     {
-        public int PathologyID { get; set; }
-        public string PathologyName { get; set; }
-        public int PathologyFees { get; set; }
-        public string PatholgyDescription { get; set; }
-        public Nullable<int> DoctorID { get; set; }
-        public Nullable<int> HospitalID { get; set; }
+        public int HSID { get; set; }
+        public int HospitalID { get; set; }
+        public int ServiceID { get; set; }
     
-        public virtual DoctorTable DoctorTable { get; set; }
         public virtual HospitalTable HospitalTable { get; set; }
+        public virtual ServiceTable ServiceTable { get; set; }
     }
 }

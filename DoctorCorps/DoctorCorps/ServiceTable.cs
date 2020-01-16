@@ -18,17 +18,15 @@ namespace DoctorCorps
         public ServiceTable()
         {
             this.DoctorTable = new HashSet<DoctorTable>();
-            this.PathologyTable = new HashSet<PathologyTable>();
+            this.HospitalServiceTable = new HashSet<HospitalServiceTable>();
         }
     
         public int ServiceID { get; set; }
         public string ServiceName { get; set; }
-        public int HospitalID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DoctorTable> DoctorTable { get; set; }
-        public virtual HospitalTable HospitalTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PathologyTable> PathologyTable { get; set; }
+        public virtual ICollection<HospitalServiceTable> HospitalServiceTable { get; set; }
     }
 }

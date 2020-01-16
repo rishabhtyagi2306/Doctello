@@ -4,29 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c1ff8618ece040d0bf19dc5a829e7cd8" Name="Diagram1">
-        <EntityTypeShape EntityType="DoctorCorpsModel.AppointmentsTable" Width="1.5" PointX="7.5" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoctorCorpsModel.DoctorTable" Width="1.5" PointX="5.25" PointY="21.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoctorCorpsModel.HospitalRatingTable" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoctorCorpsModel.HospitalTable" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoctorCorpsModel.PathologyTable" Width="1.5" PointX="7.5" PointY="23.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoctorCorpsModel.PreviousAppointmentsTable" Width="1.5" PointX="10.5" PointY="15.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoctorCorpsModel.ReportTable" Width="1.5" PointX="7.5" PointY="19.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoctorCorpsModel.ServiceTable" Width="1.5" PointX="3" PointY="22.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DoctorCorpsModel.UserTable" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+      <Diagram DiagramId="54596b07694d4cb2a020513fe0161575" Name="Diagram1">
+        <EntityTypeShape EntityType="DoctorCorpsModel.AppointmentsTable" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoctorCorpsModel.DoctorTable" Width="1.5" PointX="6" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoctorCorpsModel.HospitalRatingTable" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoctorCorpsModel.HospitalServiceTable" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoctorCorpsModel.HospitalTable" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoctorCorpsModel.PathologyTable" Width="1.5" PointX="8.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoctorCorpsModel.PreviousAppointmentsTable" Width="1.5" PointX="11.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoctorCorpsModel.ReportTable" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoctorCorpsModel.ServiceTable" Width="1.5" PointX="3.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoctorCorpsModel.UserTable" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
         <AssociationConnector Association="DoctorCorpsModel.FK_AppointmentsTable_DoctorTable" ManuallyRouted="false" />
         <AssociationConnector Association="DoctorCorpsModel.FK_AppointmentsTable_HospitalTable" ManuallyRouted="false" />
         <AssociationConnector Association="DoctorCorpsModel.FK_AppointmentsTable_UserTable" ManuallyRouted="false" />
+        <AssociationConnector Association="DoctorCorpsModel.FK_DoctorTable_HospitalTable" ManuallyRouted="false" />
         <AssociationConnector Association="DoctorCorpsModel.FK_DoctorTable_ServiceTable" ManuallyRouted="false" />
         <AssociationConnector Association="DoctorCorpsModel.FK_PathologyTable_DoctorTable" ManuallyRouted="false" />
         <AssociationConnector Association="DoctorCorpsModel.FK_PreviousAppointmentsTable_DoctorTable" ManuallyRouted="false" />
         <AssociationConnector Association="DoctorCorpsModel.FK_ReportTable_DoctorTable" ManuallyRouted="false" />
         <AssociationConnector Association="DoctorCorpsModel.FK_HospitalRatingTable_HospitalTable" ManuallyRouted="false" />
         <AssociationConnector Association="DoctorCorpsModel.FK_HospitalRatingTable_UserTable" ManuallyRouted="false" />
+        <AssociationConnector Association="DoctorCorpsModel.FK_HospitalServiceTable_HospitalTable" ManuallyRouted="false" />
+        <AssociationConnector Association="DoctorCorpsModel.FK_HospitalServiceTable_ServiceTable" ManuallyRouted="false" />
+        <AssociationConnector Association="DoctorCorpsModel.FK_PathologyTable_HospitalTable" ManuallyRouted="false" />
         <AssociationConnector Association="DoctorCorpsModel.FK_PreviousAppointmentsTable_HospitalTable" ManuallyRouted="false" />
         <AssociationConnector Association="DoctorCorpsModel.FK_ReportTable_HospitalTable" ManuallyRouted="false" />
-        <AssociationConnector Association="DoctorCorpsModel.FK_ServiceTable_HospitalTable" ManuallyRouted="false" />
-        <AssociationConnector Association="DoctorCorpsModel.FK_PathologyTable_ServiceTable" ManuallyRouted="false" />
         <AssociationConnector Association="DoctorCorpsModel.FK_PreviousAppointmentsTable_UserTable" ManuallyRouted="false" />
         <AssociationConnector Association="DoctorCorpsModel.FK_ReportTable_UserTable" ManuallyRouted="false" />
       </Diagram>

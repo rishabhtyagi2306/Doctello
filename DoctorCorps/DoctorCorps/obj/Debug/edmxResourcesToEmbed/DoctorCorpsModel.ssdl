@@ -24,6 +24,10 @@
     <Property Name="DoctorFees" Type="int" />
     <Property Name="DoctorEmail" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ServiceID" Type="int" />
+    <Property Name="HospitalID" Type="int" />
+    <Property Name="AvailableDay" Type="nvarchar(max)" />
+    <Property Name="AvailableTimeMorning" Type="nvarchar(max)" />
+    <Property Name="AvailableTimeEvening" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="HospitalRatingTable">
     <Key>
@@ -34,6 +38,14 @@
     <Property Name="Rating" Type="int" Nullable="false" />
     <Property Name="Comment" Type="nvarchar(max)" />
     <Property Name="UserID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HospitalServiceTable">
+    <Key>
+      <PropertyRef Name="HSID" />
+    </Key>
+    <Property Name="HSID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HospitalID" Type="int" Nullable="false" />
+    <Property Name="ServiceID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="HospitalTable">
     <Key>
@@ -47,6 +59,7 @@
     <Property Name="HospitalPhone" Type="nvarchar(max)" Nullable="false" />
     <Property Name="AboutHospital" Type="nvarchar(max)" />
     <Property Name="AverageRating" Type="float" />
+    <Property Name="HospitalImage" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="PathologyTable">
     <Key>
@@ -57,7 +70,7 @@
     <Property Name="PathologyFees" Type="int" Nullable="false" />
     <Property Name="PatholgyDescription" Type="nvarchar(max)" />
     <Property Name="DoctorID" Type="int" />
-    <Property Name="ServiceID" Type="int" />
+    <Property Name="HospitalID" Type="int" />
   </EntityType>
   <EntityType Name="PreviousAppointmentsTable">
     <Key>
@@ -84,7 +97,6 @@
     </Key>
     <Property Name="ServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ServiceName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="HospitalID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="UserTable">
     <Key>
@@ -141,6 +153,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DoctorTable_HospitalTable">
+    <End Role="HospitalTable" Type="Self.HospitalTable" Multiplicity="0..1" />
+    <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HospitalTable">
+        <PropertyRef Name="HospitalID" />
+      </Principal>
+      <Dependent Role="DoctorTable">
+        <PropertyRef Name="HospitalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DoctorTable_ServiceTable">
     <End Role="ServiceTable" Type="Self.ServiceTable" Multiplicity="0..1" />
     <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="*" />
@@ -177,6 +201,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_HospitalServiceTable_HospitalTable">
+    <End Role="HospitalTable" Type="Self.HospitalTable" Multiplicity="1" />
+    <End Role="HospitalServiceTable" Type="Self.HospitalServiceTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HospitalTable">
+        <PropertyRef Name="HospitalID" />
+      </Principal>
+      <Dependent Role="HospitalServiceTable">
+        <PropertyRef Name="HospitalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HospitalServiceTable_ServiceTable">
+    <End Role="ServiceTable" Type="Self.ServiceTable" Multiplicity="1" />
+    <End Role="HospitalServiceTable" Type="Self.HospitalServiceTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceTable">
+        <PropertyRef Name="ServiceID" />
+      </Principal>
+      <Dependent Role="HospitalServiceTable">
+        <PropertyRef Name="ServiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PathologyTable_DoctorTable">
     <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="0..1" />
     <End Role="PathologyTable" Type="Self.PathologyTable" Multiplicity="*" />
@@ -189,15 +237,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PathologyTable_ServiceTable">
-    <End Role="ServiceTable" Type="Self.ServiceTable" Multiplicity="0..1" />
+  <Association Name="FK_PathologyTable_HospitalTable">
+    <End Role="HospitalTable" Type="Self.HospitalTable" Multiplicity="0..1" />
     <End Role="PathologyTable" Type="Self.PathologyTable" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="ServiceTable">
-        <PropertyRef Name="ServiceID" />
+      <Principal Role="HospitalTable">
+        <PropertyRef Name="HospitalID" />
       </Principal>
       <Dependent Role="PathologyTable">
-        <PropertyRef Name="ServiceID" />
+        <PropertyRef Name="HospitalID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -273,22 +321,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ServiceTable_HospitalTable">
-    <End Role="HospitalTable" Type="Self.HospitalTable" Multiplicity="1" />
-    <End Role="ServiceTable" Type="Self.ServiceTable" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HospitalTable">
-        <PropertyRef Name="HospitalID" />
-      </Principal>
-      <Dependent Role="ServiceTable">
-        <PropertyRef Name="HospitalID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="DoctorCorpsModelStoreContainer">
     <EntitySet Name="AppointmentsTable" EntityType="Self.AppointmentsTable" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DoctorTable" EntityType="Self.DoctorTable" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HospitalRatingTable" EntityType="Self.HospitalRatingTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HospitalServiceTable" EntityType="Self.HospitalServiceTable" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HospitalTable" EntityType="Self.HospitalTable" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PathologyTable" EntityType="Self.PathologyTable" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PreviousAppointmentsTable" EntityType="Self.PreviousAppointmentsTable" Schema="dbo" store:Type="Tables" />
@@ -307,6 +344,10 @@
       <End Role="UserTable" EntitySet="UserTable" />
       <End Role="AppointmentsTable" EntitySet="AppointmentsTable" />
     </AssociationSet>
+    <AssociationSet Name="FK_DoctorTable_HospitalTable" Association="Self.FK_DoctorTable_HospitalTable">
+      <End Role="HospitalTable" EntitySet="HospitalTable" />
+      <End Role="DoctorTable" EntitySet="DoctorTable" />
+    </AssociationSet>
     <AssociationSet Name="FK_DoctorTable_ServiceTable" Association="Self.FK_DoctorTable_ServiceTable">
       <End Role="ServiceTable" EntitySet="ServiceTable" />
       <End Role="DoctorTable" EntitySet="DoctorTable" />
@@ -319,12 +360,20 @@
       <End Role="UserTable" EntitySet="UserTable" />
       <End Role="HospitalRatingTable" EntitySet="HospitalRatingTable" />
     </AssociationSet>
+    <AssociationSet Name="FK_HospitalServiceTable_HospitalTable" Association="Self.FK_HospitalServiceTable_HospitalTable">
+      <End Role="HospitalTable" EntitySet="HospitalTable" />
+      <End Role="HospitalServiceTable" EntitySet="HospitalServiceTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HospitalServiceTable_ServiceTable" Association="Self.FK_HospitalServiceTable_ServiceTable">
+      <End Role="ServiceTable" EntitySet="ServiceTable" />
+      <End Role="HospitalServiceTable" EntitySet="HospitalServiceTable" />
+    </AssociationSet>
     <AssociationSet Name="FK_PathologyTable_DoctorTable" Association="Self.FK_PathologyTable_DoctorTable">
       <End Role="DoctorTable" EntitySet="DoctorTable" />
       <End Role="PathologyTable" EntitySet="PathologyTable" />
     </AssociationSet>
-    <AssociationSet Name="FK_PathologyTable_ServiceTable" Association="Self.FK_PathologyTable_ServiceTable">
-      <End Role="ServiceTable" EntitySet="ServiceTable" />
+    <AssociationSet Name="FK_PathologyTable_HospitalTable" Association="Self.FK_PathologyTable_HospitalTable">
+      <End Role="HospitalTable" EntitySet="HospitalTable" />
       <End Role="PathologyTable" EntitySet="PathologyTable" />
     </AssociationSet>
     <AssociationSet Name="FK_PreviousAppointmentsTable_DoctorTable" Association="Self.FK_PreviousAppointmentsTable_DoctorTable">
@@ -350,10 +399,6 @@
     <AssociationSet Name="FK_ReportTable_UserTable" Association="Self.FK_ReportTable_UserTable">
       <End Role="UserTable" EntitySet="UserTable" />
       <End Role="ReportTable" EntitySet="ReportTable" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ServiceTable_HospitalTable" Association="Self.FK_ServiceTable_HospitalTable">
-      <End Role="HospitalTable" EntitySet="HospitalTable" />
-      <End Role="ServiceTable" EntitySet="ServiceTable" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

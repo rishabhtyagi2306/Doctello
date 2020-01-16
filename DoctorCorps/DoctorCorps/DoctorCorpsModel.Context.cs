@@ -28,6 +28,7 @@ namespace DoctorCorps
         public virtual DbSet<AppointmentsTable> AppointmentsTable { get; set; }
         public virtual DbSet<DoctorTable> DoctorTable { get; set; }
         public virtual DbSet<HospitalRatingTable> HospitalRatingTable { get; set; }
+        public virtual DbSet<HospitalServiceTable> HospitalServiceTable { get; set; }
         public virtual DbSet<HospitalTable> HospitalTable { get; set; }
         public virtual DbSet<PathologyTable> PathologyTable { get; set; }
         public virtual DbSet<PreviousAppointmentsTable> PreviousAppointmentsTable { get; set; }

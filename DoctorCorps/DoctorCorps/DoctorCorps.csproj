@@ -179,6 +179,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\HospitalController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DoctorCorpsModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -204,11 +205,15 @@
     <Compile Include="HospitalRatingTable.cs">
       <DependentUpon>DoctorCorpsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="HospitalServiceTable.cs">
+      <DependentUpon>DoctorCorpsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="HospitalTable.cs">
       <DependentUpon>DoctorCorpsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AadharCard.cs" />
     <Compile Include="Models\Crypto.cs" />
+    <Compile Include="Models\HospitalModel.cs" />
     <Compile Include="Models\TokenManager.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="PathologyTable.cs">
@@ -294,6 +299,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="HospitalImages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
