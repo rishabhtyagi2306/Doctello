@@ -37,6 +37,7 @@
     <NavigationProperty Name="PathologyTable" Relationship="Self.FK_PathologyTable_DoctorTable" FromRole="DoctorTable" ToRole="PathologyTable" />
     <NavigationProperty Name="PreviousAppointmentsTable" Relationship="Self.FK_PreviousAppointmentsTable_DoctorTable" FromRole="DoctorTable" ToRole="PreviousAppointmentsTable" />
     <NavigationProperty Name="ReportTable" Relationship="Self.FK_ReportTable_DoctorTable" FromRole="DoctorTable" ToRole="ReportTable" />
+    <Property Name="DoctorLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="HospitalRatingTable">
     <Key>
@@ -93,6 +94,7 @@
     <Property Name="HospitalID" Type="Int32" />
     <NavigationProperty Name="DoctorTable" Relationship="Self.FK_PathologyTable_DoctorTable" FromRole="PathologyTable" ToRole="DoctorTable" />
     <NavigationProperty Name="HospitalTable" Relationship="Self.FK_PathologyTable_HospitalTable" FromRole="PathologyTable" ToRole="HospitalTable" />
+    <Property Name="PathologyLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="PreviousAppointmentsTable">
     <Key>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DoctorCorpsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DoctorCorpsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AppointmentsTable">
           <Key>
             <PropertyRef Name="AppiontmentID" />
@@ -33,6 +33,7 @@
           <Property Name="AvailableDay" Type="nvarchar(max)" />
           <Property Name="AvailableTimeMorning" Type="nvarchar(max)" />
           <Property Name="AvailableTimeEvening" Type="nvarchar(max)" />
+          <Property Name="DoctorLocation" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="HospitalRatingTable">
           <Key>
@@ -76,6 +77,7 @@
           <Property Name="PatholgyDescription" Type="nvarchar(max)" />
           <Property Name="DoctorID" Type="int" />
           <Property Name="HospitalID" Type="int" />
+          <Property Name="PathologyLocation" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="PreviousAppointmentsTable">
           <Key>
@@ -406,8 +408,7 @@
             <End Role="ReportTable" EntitySet="ReportTable" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DoctorCorpsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -448,6 +449,7 @@
           <NavigationProperty Name="PathologyTable" Relationship="Self.FK_PathologyTable_DoctorTable" FromRole="DoctorTable" ToRole="PathologyTable" />
           <NavigationProperty Name="PreviousAppointmentsTable" Relationship="Self.FK_PreviousAppointmentsTable_DoctorTable" FromRole="DoctorTable" ToRole="PreviousAppointmentsTable" />
           <NavigationProperty Name="ReportTable" Relationship="Self.FK_ReportTable_DoctorTable" FromRole="DoctorTable" ToRole="ReportTable" />
+          <Property Name="DoctorLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="HospitalRatingTable">
           <Key>
@@ -504,6 +506,7 @@
           <Property Name="HospitalID" Type="Int32" />
           <NavigationProperty Name="DoctorTable" Relationship="Self.FK_PathologyTable_DoctorTable" FromRole="PathologyTable" ToRole="DoctorTable" />
           <NavigationProperty Name="HospitalTable" Relationship="Self.FK_PathologyTable_HospitalTable" FromRole="PathologyTable" ToRole="HospitalTable" />
+          <Property Name="PathologyLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PreviousAppointmentsTable">
           <Key>
@@ -869,6 +872,7 @@
           <EntitySetMapping Name="DoctorTable">
             <EntityTypeMapping TypeName="DoctorCorpsModel.DoctorTable">
               <MappingFragment StoreEntitySet="DoctorTable">
+                <ScalarProperty Name="DoctorLocation" ColumnName="DoctorLocation" />
                 <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
                 <ScalarProperty Name="DoctorName" ColumnName="DoctorName" />
                 <ScalarProperty Name="DoctorRegNo" ColumnName="DoctorRegNo" />
@@ -921,6 +925,7 @@
           <EntitySetMapping Name="PathologyTable">
             <EntityTypeMapping TypeName="DoctorCorpsModel.PathologyTable">
               <MappingFragment StoreEntitySet="PathologyTable">
+                <ScalarProperty Name="PathologyLocation" ColumnName="PathologyLocation" />
                 <ScalarProperty Name="PathologyID" ColumnName="PathologyID" />
                 <ScalarProperty Name="PathologyName" ColumnName="PathologyName" />
                 <ScalarProperty Name="PathologyFees" ColumnName="PathologyFees" />

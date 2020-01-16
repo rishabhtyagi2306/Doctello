@@ -28,6 +28,7 @@
     <Property Name="AvailableDay" Type="nvarchar(max)" />
     <Property Name="AvailableTimeMorning" Type="nvarchar(max)" />
     <Property Name="AvailableTimeEvening" Type="nvarchar(max)" />
+    <Property Name="DoctorLocation" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="HospitalRatingTable">
     <Key>
@@ -71,6 +72,7 @@
     <Property Name="PatholgyDescription" Type="nvarchar(max)" />
     <Property Name="DoctorID" Type="int" />
     <Property Name="HospitalID" Type="int" />
+    <Property Name="PathologyLocation" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="PreviousAppointmentsTable">
     <Key>

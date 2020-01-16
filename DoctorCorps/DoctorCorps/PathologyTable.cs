@@ -20,6 +20,7 @@ namespace DoctorCorps
         public string PatholgyDescription { get; set; }
         public Nullable<int> DoctorID { get; set; }
         public Nullable<int> HospitalID { get; set; }
+        public string PathologyLocation { get; set; }
     
         public virtual DoctorTable DoctorTable { get; set; }
         public virtual HospitalTable HospitalTable { get; set; }

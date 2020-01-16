@@ -18,6 +18,7 @@
     <EntitySetMapping Name="DoctorTable">
       <EntityTypeMapping TypeName="DoctorCorpsModel.DoctorTable">
         <MappingFragment StoreEntitySet="DoctorTable">
+          <ScalarProperty Name="DoctorLocation" ColumnName="DoctorLocation" />
           <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
           <ScalarProperty Name="DoctorName" ColumnName="DoctorName" />
           <ScalarProperty Name="DoctorRegNo" ColumnName="DoctorRegNo" />
@@ -70,6 +71,7 @@
     <EntitySetMapping Name="PathologyTable">
       <EntityTypeMapping TypeName="DoctorCorpsModel.PathologyTable">
         <MappingFragment StoreEntitySet="PathologyTable">
+          <ScalarProperty Name="PathologyLocation" ColumnName="PathologyLocation" />
           <ScalarProperty Name="PathologyID" ColumnName="PathologyID" />
           <ScalarProperty Name="PathologyName" ColumnName="PathologyName" />
           <ScalarProperty Name="PathologyFees" ColumnName="PathologyFees" />

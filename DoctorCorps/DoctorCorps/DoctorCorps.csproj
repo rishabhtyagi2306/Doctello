@@ -213,7 +213,9 @@
     </Compile>
     <Compile Include="Models\AadharCard.cs" />
     <Compile Include="Models\Crypto.cs" />
+    <Compile Include="Models\DoctorModel.cs" />
     <Compile Include="Models\HospitalModel.cs" />
+    <Compile Include="Models\ServiceModel.cs" />
     <Compile Include="Models\TokenManager.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="PathologyTable.cs">
