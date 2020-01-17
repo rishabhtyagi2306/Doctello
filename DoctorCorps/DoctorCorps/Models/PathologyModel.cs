@@ -15,7 +15,7 @@ namespace DoctorCorps.Models
         public Nullable<int> HospitalID { get; set; }
         public string PathologyLocation { get; set; }
 
-        public virtual DoctorTable DoctorTable { get; set; }
-        public virtual HospitalTable HospitalTable { get; set; }
+        public virtual DoctorModel DoctorModel { get; set; }
+        public virtual HospitalModel HospitalModel { get; set; }
     }
 }

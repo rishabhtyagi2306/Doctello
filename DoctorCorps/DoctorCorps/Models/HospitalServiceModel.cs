@@ -11,7 +11,7 @@ namespace DoctorCorps.Models
         public int HospitalID { get; set; }
         public int ServiceID { get; set; }
 
-        public virtual HospitalTable HospitalTable { get; set; }
-        public virtual ServiceTable ServiceTable { get; set; }
+        public virtual HospitalModel HospitalModel { get; set; }
+        public virtual ServiceModel ServiceModel { get; set; }
     }
 }

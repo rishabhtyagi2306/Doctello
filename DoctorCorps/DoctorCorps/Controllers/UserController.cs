@@ -109,5 +109,24 @@ namespace DoctorCorps.Controllers
             else
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Your Aadhar should be 12 digits long");
         }
+
+        [HttpGet]
+        [Route("api/User/Profile")]
+        public HttpResponseMessage UserProfile(string token)
+        {
+            using (DoctorCorpsEntities context = new DoctorCorpsEntities())
+            {
+                UserTable user = new UserTable();
+                string username = TokenManager.ValidateToken(token);
+                user = context.UserTable.FirstOrDefault(m => m.UserEmail == username);
+                if (user != null)
+                {
+                    var x = new UserModel().UserProfile(user.UserID);
+                    return Request.CreateResponse(HttpStatusCode.OK, x);
+                }
+                else
+                    return Request.CreateResponse(HttpStatusCode.Unauthorized, "You are not authorized to see this content");
+            }
+        }
     }
 }

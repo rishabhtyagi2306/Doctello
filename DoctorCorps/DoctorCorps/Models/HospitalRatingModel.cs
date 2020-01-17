@@ -13,7 +13,7 @@ namespace DoctorCorps.Models
         public string Comment { get; set; }
         public int UserID { get; set; }
 
-        public virtual HospitalTable HospitalTable { get; set; }
-        public virtual UserTable UserTable { get; set; }
+        public virtual HospitalModel HospitalModel { get; set; }
+        public virtual UserModel UserModel { get; set; }
     }
 }

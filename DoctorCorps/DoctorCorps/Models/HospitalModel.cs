@@ -153,5 +153,73 @@ namespace DoctorCorps.Models
                 return result;
             }
         }
+
+        public List<HospitalServiceModel> HospitalService(int hospitalid)
+        {
+            using(var context = new DoctorCorpsEntities())
+            {
+                var result = context.HospitalServiceTable
+                    .Where(x => x.HospitalID == hospitalid)
+                    .Select(x => new HospitalServiceModel()
+                    {
+                        ServiceModel = new ServiceModel()
+                        {
+                            ServiceID = x.ServiceTable.ServiceID,
+                            ServiceName = x.ServiceTable.ServiceName,
+                            Image = x.ServiceTable.Image
+                        }
+                    }).ToList();
+                return result;
+            }
+        }
+
+        public List<HospitalRatingModel> HospitalFeedback(int hospitalid)
+        {
+            using(var context = new DoctorCorpsEntities())
+            {
+                var result = context.HospitalRatingTable
+                    .Where(x => x.HospitalID == hospitalid)
+                    .Select(x => new HospitalRatingModel()
+                    {
+                        RatingID = x.RatingID,
+                        Rating = x.Rating,
+                        Comment = x.Comment,
+                        UserModel = new UserModel()
+                        {
+                            UserName = x.UserTable.UserName,
+                            UserEmail = x.UserTable.UserEmail
+                        }
+                    }).ToList();
+                return result;
+            }
+        }
+
+        public List<PathologyModel> PathologyServices(int hospitalid)
+        {
+            using(var context = new DoctorCorpsEntities())
+            {
+                var result = context.PathologyTable
+                    .Where(x => x.HospitalID == hospitalid)
+                    .Select(x => new PathologyModel()
+                    {
+                        PathologyID = x.PathologyID,
+                        PathologyName = x.PathologyName,
+                        PathologyFees = x.PathologyFees,
+                        PatholgyDescription = x.PatholgyDescription,
+                        PathologyLocation = x.PathologyLocation,
+                        DoctorModel = new DoctorModel()
+                        {
+                            DoctorID = x.DoctorTable.DoctorID,
+                            DoctorName = x.DoctorTable.DoctorName,
+                            DoctorRegNo = x.DoctorTable.DoctorRegNo,
+                            DoctorEmail = x.DoctorTable.DoctorEmail,
+                            AvailableDay = x.DoctorTable.AvailableDay,
+                            AvailableTimeEvening = x.DoctorTable.AvailableTimeEvening,
+                            AvailableTimeMorning = x.DoctorTable.AvailableTimeMorning
+                        }
+                    }).ToList();
+                return result;
+            }
+        }
     }
 }

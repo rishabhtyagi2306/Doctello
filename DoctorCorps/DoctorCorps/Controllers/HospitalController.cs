@@ -86,5 +86,62 @@ namespace DoctorCorps.Controllers
                     return Request.CreateResponse(HttpStatusCode.Unauthorized, "You are not authorized to see this content");
             }
         }
+
+        [HttpGet]
+        [Route("api/User/HospitalDetails/Services/{hospitalid}")]
+        public HttpResponseMessage HospitalServices(int hospitalid, string token)
+        {
+            using(DoctorCorpsEntities context = new DoctorCorpsEntities())
+            {
+                UserTable user = new UserTable();
+                string username = TokenManager.ValidateToken(token);
+                user = context.UserTable.FirstOrDefault(m => m.UserEmail == username);
+                if (user != null)
+                {
+                    var x = new HospitalModel().HospitalService(hospitalid);
+                    return Request.CreateResponse(HttpStatusCode.OK, x);
+                }
+                else
+                    return Request.CreateResponse(HttpStatusCode.Unauthorized, "You are not authorized to see this content");
+            }
+        }
+
+        [HttpGet]
+        [Route("api/User/HospitalDetails/Rating/{hospitalid}")]
+        public HttpResponseMessage HospitalFeedback(int hospitalid, string token)
+        {
+            using (DoctorCorpsEntities context = new DoctorCorpsEntities())
+            {
+                UserTable user = new UserTable();
+                string username = TokenManager.ValidateToken(token);
+                user = context.UserTable.FirstOrDefault(m => m.UserEmail == username);
+                if (user != null)
+                {
+                    var x = new HospitalModel().HospitalFeedback(hospitalid);
+                    return Request.CreateResponse(HttpStatusCode.OK, x);
+                }
+                else
+                    return Request.CreateResponse(HttpStatusCode.Unauthorized, "You are not authorized to see this content");
+            }
+        }
+
+        [HttpGet]
+        [Route("api/User/Hospital/Pathology/{hospitalid}")]
+        public HttpResponseMessage PathologyService(int hospitalid, string token)
+        {
+            using (DoctorCorpsEntities context = new DoctorCorpsEntities())
+            {
+                UserTable user = new UserTable();
+                string username = TokenManager.ValidateToken(token);
+                user = context.UserTable.FirstOrDefault(m => m.UserEmail == username);
+                if (user != null)
+                {
+                    var x = new HospitalModel().PathologyServices(hospitalid);
+                    return Request.CreateResponse(HttpStatusCode.OK, x);
+                }
+                else
+                    return Request.CreateResponse(HttpStatusCode.Unauthorized, "You are not authorized to see this content");
+            }
+        }
     }
 }

@@ -199,6 +199,27 @@ namespace DoctorCorps.Models
                 context.SaveChanges();
             }
         }
+
+        public List<UserModel> UserProfile(int userid)
+        {
+            using (DoctorCorpsEntities context = new DoctorCorpsEntities())
+            {
+                var result = context.UserTable
+                    .Where(x => x.UserID == userid)
+                    .Select(x => new UserModel()
+                    {
+                        UserID = x.UserID,
+                        UserName = x.UserName,
+                        UserEmail = x.UserEmail,
+                        UserDOB = x.UserDOB,
+                        UserGender = x.UserGender,
+                        UserPhone = x.UserPhone,
+                        UserLocation = x.UserLocation,
+                        MedicalHistory = x.MedicalHistory
+                    }).ToList();
+                return result;
+            }
+        }
     }
 
     public class SmsService : IIdentityMessageService
