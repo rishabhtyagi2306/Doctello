@@ -105,6 +105,7 @@
     <EntitySetMapping Name="ServiceTable">
       <EntityTypeMapping TypeName="DoctorCorpsModel.ServiceTable">
         <MappingFragment StoreEntitySet="ServiceTable">
+          <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
           <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
         </MappingFragment>

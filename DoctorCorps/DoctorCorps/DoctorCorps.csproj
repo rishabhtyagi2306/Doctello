@@ -212,9 +212,15 @@
       <DependentUpon>DoctorCorpsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AadharCard.cs" />
+    <Compile Include="Models\AppointmentsModel.cs" />
     <Compile Include="Models\Crypto.cs" />
     <Compile Include="Models\DoctorModel.cs" />
     <Compile Include="Models\HospitalModel.cs" />
+    <Compile Include="Models\HospitalRatingModel.cs" />
+    <Compile Include="Models\HospitalServiceModel.cs" />
+    <Compile Include="Models\PathologyModel.cs" />
+    <Compile Include="Models\PreviousAppointmentsModel.cs" />
+    <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\ServiceModel.cs" />
     <Compile Include="Models\TokenManager.cs" />
     <Compile Include="Models\UserModel.cs" />
@@ -302,6 +308,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="HospitalImages\" />
+    <Folder Include="ServiceImages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

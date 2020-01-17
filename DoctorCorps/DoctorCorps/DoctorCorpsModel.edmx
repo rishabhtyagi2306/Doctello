@@ -104,6 +104,7 @@
           </Key>
           <Property Name="ServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ServiceName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="UserTable">
           <Key>
@@ -541,6 +542,7 @@
           <Property Name="ServiceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="DoctorTable" Relationship="Self.FK_DoctorTable_ServiceTable" FromRole="ServiceTable" ToRole="DoctorTable" />
           <NavigationProperty Name="HospitalServiceTable" Relationship="Self.FK_HospitalServiceTable_ServiceTable" FromRole="ServiceTable" ToRole="HospitalServiceTable" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserTable">
           <Key>
@@ -959,6 +961,7 @@
           <EntitySetMapping Name="ServiceTable">
             <EntityTypeMapping TypeName="DoctorCorpsModel.ServiceTable">
               <MappingFragment StoreEntitySet="ServiceTable">
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
                 <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
               </MappingFragment>

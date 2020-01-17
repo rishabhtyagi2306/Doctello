@@ -99,6 +99,7 @@
     </Key>
     <Property Name="ServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ServiceName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Image" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="UserTable">
     <Key>

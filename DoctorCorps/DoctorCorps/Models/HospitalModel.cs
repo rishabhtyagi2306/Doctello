@@ -17,39 +17,22 @@ namespace DoctorCorps.Models
         public Nullable<double> AverageRating { get; set; }
         public string HospitalImage { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AppointmentsTable> AppointmentsTable { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AppointmentsModel> AppointmentsModel { get; set; }
+        
         public virtual ICollection<DoctorModel> DoctorModel { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HospitalRatingTable> HospitalRatingTable { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HospitalServiceTable> HospitalServiceTable { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PathologyTable> PathologyTable { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PreviousAppointmentsTable> PreviousAppointmentsTable { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ReportTable> ReportTable { get; set; }
+        
+        public virtual ICollection<HospitalRatingModel> HospitalRatingModel { get; set; }
+        
+        public virtual ICollection<HospitalServiceModel> HospitalServiceModel { get; set; }
+        
+        public virtual ICollection<PathologyModel> PathologyModel { get; set; }
+        
+        public virtual ICollection<PreviousAppointmentsModel> PreviousAppointmentsModel { get; set; }
+        
+        public virtual ICollection<ReportModel> ReportModel { get; set; }
 
 
-        //public List<HospitalModel> HospitalList()
-        //{
-        //    using(var context = new DoctorCorpsEntities())
-        //    {
-        //        var result = context.HospitalTable
-        //            .Select(x => new HospitalModel()
-        //            {
-        //                HospitalID = x.HospitalID,
-        //                HospitalName = x.HospitalName,
-        //                HospitalEmail = x.HospitalEmail,
-        //                HospitalPhone = x.HospitalPhone,
-        //                HospitalImage = x.HospitalImage,
-        //                AverageRating = x.AverageRating
-        //            }).ToList();
-        //        return result;
-        //    }
-        //}
+
 
         public List<HospitalModel> HospitalListLocation(string Location)
         {
@@ -95,7 +78,8 @@ namespace DoctorCorps.Models
                     .Select(m => new ServiceModel()
                     {
                         ServiceID = m.ServiceID,
-                        ServiceName = m.ServiceName
+                        ServiceName = m.ServiceName,
+                        Image = m.Image
                     }).ToList();
                 return result;
             }
@@ -134,6 +118,39 @@ namespace DoctorCorps.Models
                     }).ToList();
                     return result;
                 }
+            }
+        }
+
+        public List<DoctorModel> HospitalDetails(int hospitalid)
+        {
+            using(var context = new DoctorCorpsEntities())
+            {
+                var result = context.DoctorTable
+                    .Where(x => x.HospitalTable.HospitalID == hospitalid)
+                    .Select(x => new DoctorModel()
+                    {
+                        DoctorID = x.DoctorID,
+                        DoctorName = x.DoctorName,
+                        DoctorRegNo = x.DoctorRegNo,
+                        DoctorFees = x.DoctorFees,
+                        DoctorEmail = x.DoctorEmail,
+                        AvailableDay = x.AvailableDay,
+                        AvailableTimeEvening = x.AvailableTimeEvening,
+                        AvailableTimeMorning = x.AvailableTimeMorning,
+                        HospitalModel = new HospitalModel()
+                        {
+                            HospitalID = x.HospitalTable.HospitalID,
+                            HospitalName = x.HospitalTable.HospitalName,
+                            HospitalEmail = x.HospitalTable.HospitalEmail,
+                            HospitalPhone = x.HospitalTable.HospitalPhone,
+                            HospitalImage = x.HospitalTable.HospitalImage,
+                            AverageRating = x.HospitalTable.AverageRating,
+                            HospitalAddress = x.HospitalTable.HospitalAddress,
+                            HospitalLocation = x.HospitalTable.HospitalLocation,
+                            AboutHospital = x.HospitalTable.AboutHospital
+                        }
+                    }).ToList();
+                return result;
             }
         }
     }
